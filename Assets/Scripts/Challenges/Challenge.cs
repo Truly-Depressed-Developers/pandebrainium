@@ -13,7 +13,7 @@ public class Challenge: MonoBehaviour {
     }
 
     [ContextMenu("Complete Task")]
-    private void FulfillTask() {
+    public void FulfillTask() {
         // Invoke the event
         Debug.Log("Invoking FulfullTask");
         Debug.Log(OnTaskFulfilled);

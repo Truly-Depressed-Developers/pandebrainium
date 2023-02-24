@@ -14,7 +14,7 @@ public class ChallengeManager : MonoBehaviour {
             return;
         }
 
-        int randomIndex = Random.Range(0, challengeList.Count - 1);
+        int randomIndex = Random.Range(0, challengeList.Count);
         GameObject randomChallenge = challengeList[randomIndex];
 
         Debug.Log("Spawned task: " + randomChallenge.ToString());
