@@ -41,13 +41,13 @@ public class ChallengeManager : MonoBehaviour {
         Vector2 maxSpawnRange = new(1920, 1080);
 
         Vector2 spawnRange = maxSpawnRange - challengePanelSize;
-        int randomX = (int) (Random.Range(0, spawnRange.x) - spawnRange.x / 2);
-        int randomY = (int) (Random.Range(0, spawnRange.y) - spawnRange.y / 2);
+        int randomX = (int)(Random.Range(0, spawnRange.x) - spawnRange.x / 2);
+        int randomY = (int)(Random.Range(0, spawnRange.y) - spawnRange.y / 2);
 
         Debug.Log(randomX + " - " + randomY);
 
         // Move the challenge panel
-        challengeRect.localPosition = new Vector3(randomX, randomY, challengeRect.localPosition.z); 
+        challengeRect.localPosition = new Vector3(randomX, randomY, challengeRect.localPosition.z);
 
 
         // Register events
@@ -55,6 +55,13 @@ public class ChallengeManager : MonoBehaviour {
 
         challengeComponent.OnTaskFulfilled += OnTaskFulfilled;
         challengeComponent.OnTaskFailure += OnTaskFailure;
+    }
+
+    [ContextMenu("Spawn 20 challenges")]
+    void SpawnMany() {
+        for(int i = 0; i < 20; i++) {
+            this.SpawnTask();
+        }
     }
 
     void OnTaskFulfilled() {
