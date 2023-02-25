@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class ChallengeManager : MonoBehaviour {
 
@@ -16,6 +17,24 @@ public class ChallengeManager : MonoBehaviour {
 
     [SerializeField] OsuTaskManager osuTaskManager;
 
+    public void StartDay(int strength, int dexterity, int inteligence, int sanity, int day, Action onDayCompleted, Action onDayLost) {
+        StartCoroutine(FinishDayAfterDusk(onDayCompleted));
+        StartCoroutine(ChallengeFactory(strength, dexterity, inteligence, sanity, day));
+    }
+
+    private IEnumerator FinishDayAfterDusk(Action onDayCompleted) {
+        yield return new WaitForSeconds(120f);
+        onDayCompleted();
+    }
+
+    private IEnumerator ChallengeFactory(int strength, int dexterity, int inteligence, int sanity, int day) {
+        yield return new WaitForSeconds(3f);
+
+        while (true) {
+            yield return new WaitForSeconds(.5f); // Random time
+        }
+    }
+
     [ContextMenu("Spawn Random Task")]
     void SpawnTask() {
         if (challengePrefabList == null || challengePrefabList.Count == 0) {
@@ -24,7 +43,7 @@ public class ChallengeManager : MonoBehaviour {
         }
 
         // Pick random challenge from list
-        int randomIndex = Random.Range(0, challengePrefabList.Count);
+        int randomIndex = UnityEngine.Random.Range(0, challengePrefabList.Count);
         GameObject randomChallenge = challengePrefabList[randomIndex];
 
         Debug.Log("Spawned task: " + randomChallenge.ToString());
@@ -75,8 +94,8 @@ public class ChallengeManager : MonoBehaviour {
 
         Vector2 spawnRange = maxSpawnRange - challengePanelSize;
 
-        int randomX = (int)(Random.Range(0, spawnRange.x) - spawnRange.x / 2);
-        int randomY = (int)(Random.Range(0, spawnRange.y) - spawnRange.y / 2);
+        int randomX = (int)(UnityEngine.Random.Range(0, spawnRange.x) - spawnRange.x / 2);
+        int randomY = (int)(UnityEngine.Random.Range(0, spawnRange.y) - spawnRange.y / 2);
 
         Debug.Log($"pos: ({randomX},{randomY}), max: ({maxSpawnRange.x},{maxSpawnRange.y}), size: ({challengePanelSize.x},{challengePanelSize.y}), range: ({spawnRange.x},{spawnRange.y})");
 
