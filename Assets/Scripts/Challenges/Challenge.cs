@@ -3,27 +3,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Challenge: MonoBehaviour {
-    public event Action OnTaskFulfilled;
-    public event Action OnTaskFailure;
+public class Challenge : MonoBehaviour
+{
+   public event Action OnTaskFulfilled;
+   public event Action OnTaskFailure;
 
-    // Add logic
-    private void Start() {
-        
-    }
+   [SerializeField] float taskTime = 3f;
+   float startTime;
 
-    [ContextMenu("Complete Task")]
-    public void FulfillTask() {
-        // Invoke the event
-        Debug.Log("Invoking FulfullTask");
-        Debug.Log(OnTaskFulfilled);
-        OnTaskFulfilled?.Invoke();
+   // Add logic
+   private void Start()
+   {
+      startTime = Time.time;
+   }
+
+   private void Update()
+   {
+      CheckTaskDeath();
+   }
+
+   [ContextMenu("Complete Task")]
+   public void FulfillTask()
+   {
+      // Invoke the event
+      Debug.Log("Invoking FulfullTask");
+      Debug.Log(OnTaskFulfilled);
+      OnTaskFulfilled?.Invoke();
 
 
-        // Do other stuff
+      // Do other stuff
 
 
-        // Close task
-        Destroy(this.gameObject);
-    }
+      // Close task
+      Destroy(this.gameObject);
+   }
+
+   public void CheckTaskDeath()
+   {
+      if (Time.time - startTime < taskTime) return;
+
+      OnTaskFailure?.Invoke();
+      Destroy(this.gameObject);
+   }
 }
