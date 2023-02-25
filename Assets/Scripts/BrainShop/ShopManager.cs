@@ -5,33 +5,61 @@ using TMPro;
 
 public class ShopManager : MonoBehaviour
 {
+   public static ShopManager instance;
+
    [SerializeField] GameObject brainDataContainerPrefab;
    [SerializeField] Transform brainRowContainer;
 
    List<DrawBrain.BrainStatistics> brainStatisticsList = new List<DrawBrain.BrainStatistics>();
 
+   // Statistic Screen
+   [SerializeField] TMP_Text dexterityValue;
+   [SerializeField] TMP_Text intelligenceValue;
+   [SerializeField] TMP_Text strengthValue;
+   [SerializeField] TMP_Text sanityValue;
+   [SerializeField] TMP_Text moneyCountValue;
+
    // Start is called before the first frame update
    void Start()
    {
+      instance = this;
+
+      SpawnBrains();
+      UpdatePlayerValues();
+
+      PlayerManager.instance.changeEvent.AddListener(SpawnBrains);
+      PlayerManager.instance.changeEvent.AddListener(UpdatePlayerValues);
+   }
+
+   private void SpawnBrains()
+   {
+      brainStatisticsList = new List<DrawBrain.BrainStatistics>();
+
       for (int i = 0; i < 3; i++)
       {
          var newBrainStatisticData = DrawBrain.DrawRandomBrain();
          brainStatisticsList.Add(newBrainStatisticData);
       }
 
-      foreach (var brainStatistic in brainStatisticsList)
+      foreach (Transform childTransform in brainRowContainer) {
+         GameObject.Destroy(childTransform.gameObject);
+      }
+
+      foreach (var brainStatistics in brainStatisticsList)
       {
          var brainDataGameObject = Instantiate(brainDataContainerPrefab, brainRowContainer);
+         var brainContainerScript = brainDataGameObject.GetComponent<BrainContainer>();
 
-         var dexterityText = brainDataGameObject.transform.Find("BrainStatsValues/DexterityScore").GetComponent<TMP_Text>();
-         var intelligenceText = brainDataGameObject.transform.Find("BrainStatsValues/IntelligenceScore").GetComponent<TMP_Text>();
-         var strengthText = brainDataGameObject.transform.Find("BrainStatsValues/StrengthScore").GetComponent<TMP_Text>();
-         var costText = brainDataGameObject.transform.Find("Cost").GetComponent<TMP_Text>();
-
-         dexterityText.SetText(brainStatistic.dexterity.ToString());
-         intelligenceText.SetText(brainStatistic.intelligence.ToString());
-         strengthText.SetText(brainStatistic.strength.ToString());
-         costText.SetText(brainStatistic.cost.ToString()+ "$");
+         brainContainerScript.Init(brainStatistics);
       }
+   }
+
+   private void UpdatePlayerValues()
+   {
+      dexterityValue.SetText(PlayerManager.instance.dexterity.ToString());
+      intelligenceValue.SetText(PlayerManager.instance.intelligence.ToString());
+      strengthValue.SetText(PlayerManager.instance.strength.ToString());
+      sanityValue.SetText(PlayerManager.instance.sanity.ToString());
+      moneyCountValue.SetText(PlayerManager.instance.budget.ToString() + "$");
    }
 }
