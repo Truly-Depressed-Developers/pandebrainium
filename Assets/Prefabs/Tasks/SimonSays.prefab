@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 317295542426969264}
   - component: {fileID: 1570413553686429226}
   - component: {fileID: 1570413553686429225}
+  - component: {fileID: 1375137628940825888}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -104,6 +105,20 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0.67206573, a: 1}
   multip: 1.8
   baseCount: 3
+  trigger: {fileID: 1375137628940825888}
+--- !u!114 &1375137628940825888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714162078928864294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2a16ff6deb9b7f418b99257894c281a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTime: 10
 --- !u!1 &3194855316424008105
 GameObject:
   m_ObjectHideFlags: 0
@@ -317,7 +332,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8295422443049614508}
-  - component: {fileID: 1706068164717086854}
   m_Layer: 0
   m_Name: SimonSays
   m_TagString: Untagged
@@ -341,16 +355,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1706068164717086854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8496924203118068487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08abbc93f7f7e7a4f81198ee54c9fcec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  taskTime: 49.67

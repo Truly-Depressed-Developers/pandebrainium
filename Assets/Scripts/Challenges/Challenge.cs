@@ -21,7 +21,6 @@ public class Challenge : MonoBehaviour {
     }
 
     public void SetTimer(float maxTime, float currentTime) {
-        Debug.Log(currentTime + " | " + maxTime + " | " + timerBackground.sizeDelta.x);
         timerForeground.sizeDelta = new Vector2(
             (currentTime / maxTime) * timerBackground.rect.width,
             timerForeground.sizeDelta.y

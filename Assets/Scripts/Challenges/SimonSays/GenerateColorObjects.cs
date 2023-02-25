@@ -16,6 +16,7 @@ public class GenerateColorObjects : MonoBehaviour
     };
     [SerializeField] private float multip = 1.0f;
     [SerializeField] private int baseCount = 3;
+    [SerializeField] private ChallengeTrigger trigger;
 
     private List<Color> selectedColors = new List<Color>();
     private int colorIdToClick = 0;
@@ -62,12 +63,12 @@ public class GenerateColorObjects : MonoBehaviour
 
     void TaskComplete()
     {
-        Debug.Log("COMPLETE");
+        trigger.Fulfill();
     }
 
     void FailTask()
     {
-        Debug.Log("FAILED");
+        trigger.Fail();
     }
 
     void checkClickedBtn(GameObject gObj, int colorId)
