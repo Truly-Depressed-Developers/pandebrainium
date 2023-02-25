@@ -445,7 +445,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7bf8993c9391d31469d5c7f4b4ccd6b9, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -593,4 +593,6 @@ MonoBehaviour:
   clickBtnPrefab: {fileID: 4074628059013602162, guid: 159c53a397f755a43944e04712d96ef1, type: 3}
   sprites:
   - {fileID: 21300000, guid: 7bf8993c9391d31469d5c7f4b4ccd6b9, type: 3}
+  - {fileID: 21300000, guid: a53563fd99539fa4b893da5d36f12db7, type: 3}
+  - {fileID: 21300000, guid: 74a80d8df5815c64a9f68301b5ca626d, type: 3}
   trigger: {fileID: 5246541435592544501}
