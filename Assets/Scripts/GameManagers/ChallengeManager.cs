@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChallengeManager : MonoBehaviour {
 
-    static Vector2 CalculateTotalPanelSize(Vector2 innerSize) {
+    public static Vector2 CalculateTotalPanelSize(Vector2 innerSize) {
         return innerSize + new Vector2(10 + 10, 10 + 10 + 20 + 10);
     }
 
@@ -13,6 +13,8 @@ public class ChallengeManager : MonoBehaviour {
     [SerializeField] Transform challengeContainer;
 
     [SerializeField] RectTransform spawnAreaPanel;
+
+    [SerializeField] OsuTaskManager osuTaskManager;
 
     [ContextMenu("Spawn Random Task")]
     void SpawnTask() {
@@ -88,6 +90,15 @@ public class ChallengeManager : MonoBehaviour {
             this.SpawnTask();
         }
     }
+
+    // [ContextMenu("Activate Osu")]
+    // void OsuActivate(){
+    //     osuTaskManager.onFailure.AddListener(OnTaskFailure);
+    //     osuTaskManager.onFulfilled.AddListener(OnTaskFulfilled);
+    //     osuTaskManager.Activate();
+
+
+    // }
 
     void OnTaskFulfilled() {
         Debug.Log("Task fulfilled.");
