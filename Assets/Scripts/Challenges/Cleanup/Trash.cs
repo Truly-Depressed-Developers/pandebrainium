@@ -1,10 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using System;
 
-public class Trash : MonoBehaviour, IDragHandler {
+public class Trash : MonoBehaviour {
     public event Action OnCollect;
     public event Action OnUncollect;
 
@@ -12,10 +11,6 @@ public class Trash : MonoBehaviour, IDragHandler {
     private float zoneX = 0, zoneY = 0;
 
     private bool collected = false;
-
-    public void OnDrag(PointerEventData eventData) {
-        transform.position = eventData.position;
-    }
 
     private void Update() {
         if (
