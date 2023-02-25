@@ -26,6 +26,6 @@ public class DotClick : MonoBehaviour
     public void ClickHandler(){
         Debug.Log("Clicked");
         onClickEvent.Invoke(int.Parse(text.text));
-        Destroy(transform.parent.parent.gameObject);
+        Destroy(gameObject);
     }
 }

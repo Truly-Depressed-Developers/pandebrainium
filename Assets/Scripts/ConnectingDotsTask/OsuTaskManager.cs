@@ -5,38 +5,18 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
 
-[System.Serializable]
-struct StartPosition
-{
-   public float x;
-   public float y;
 
-   public StartPosition(float x, float y)
-   {
-      this.x = x;
-      this.y = y;
-   }
-}
 
-[System.Serializable]
-struct DotPosition
-{
-   public int x;
-   public int y;
-
-   public DotPosition(int x, int y)
-   {
-      this.x = x;
-      this.y = y;
-   }
-}
 
 
 public class OsuTaskManager : MonoBehaviour
 {
    [SerializeField] Transform challengeContainer;
 
+   [SerializeField] GameObject osuPanelContainerPrefab;
    [SerializeField] GameObject dotPrefab;
+
+   GameObject? osuGameObject;
 
    // [SerializeField] private ChallengeTrigger challengeScript;
 
@@ -76,6 +56,17 @@ public class OsuTaskManager : MonoBehaviour
 
    public void Activate()
    {
+      if (osuGameObject != null) return;
+
+      osuGameObject = Instantiate(osuPanelContainerPrefab, challengeContainer);
+
+      var osuPanelTransform = osuGameObject.transform.GetChild(0);
+
+      var osuPanelRectTransform = osuPanelTransform.GetComponent<RectTransform>();
+
+      Vector2 maxSpawnRange = new(1920, 1080);
+
+      Vector2 spawnRange = maxSpawnRange - osuPanelRectTransform.sizeDelta;
 
       for (int i = pointCount; i >= 1; i--)
       {
@@ -102,25 +93,18 @@ public class OsuTaskManager : MonoBehaviour
          // var osuRectTransform2 = dotGameObject.transform.GetChild(0).GetChild(0).GetComponent<RectTransform>(); ;
          // osuRectTransform2.localPosition = new Vector3(randomX, randomY, osuRectTransform2.localPosition.z);
 
-         var dotGameObject = Instantiate(dotPrefab, challengeContainer);
 
-         var osuPanelGameObject = dotGameObject.transform.GetChild(0);
-
-         var osuPanelRectTransform = osuPanelGameObject.GetComponent<RectTransform>();
-
-         Vector2 maxSpawnRange = new(1920, 1080);
-
-         Vector2 spawnRange = maxSpawnRange - osuPanelRectTransform.sizeDelta;
 
          int randomX = (int)(Random.Range(0, spawnRange.x) - spawnRange.x / 2);
          int randomY = (int)(Random.Range(0, spawnRange.y) - spawnRange.y / 2);
 
-         var osuDotGameObject = dotGameObject.transform.GetChild(0).GetChild(0);
+         // var osuDotGameObject = osuGameObject.transform.GetChild(0).GetChild(0);
+         var osuDotGameObject = Instantiate(dotPrefab, osuPanelTransform);
          var osuDotRectTransform = osuDotGameObject.GetComponent<RectTransform>();
          osuDotRectTransform.localPosition = new Vector3(randomX, randomY, osuPanelRectTransform.localPosition.z);
 
 
-         var textGameObject = dotGameObject.transform.GetChild(0).GetChild(0).GetChild(0);
+         var textGameObject = osuDotGameObject.transform.GetChild(0);
          var textComp = textGameObject.GetComponent<TMP_Text>();
 
          textComp.SetText(i.ToString());
@@ -141,10 +125,14 @@ public class OsuTaskManager : MonoBehaviour
          onFailure.Invoke();
          currentPointNumber = 1;
 
-         foreach (Transform g in challengeContainer.GetComponentsInChildren<Transform>())
-         {
-            Destroy(g.gameObject);
-         }
+         Destroy(osuGameObject);
+
+         // foreach (Transform g in challengeContainer.GetComponentsInChildren<Transform>())
+         // {
+         //    // Destroy(g.gameObject);
+         //    if(g.name == )
+         //    Debug.Log(g.name);
+         // }
 
          // challengeContainer.get
       }
@@ -153,6 +141,7 @@ public class OsuTaskManager : MonoBehaviour
          // challengeScript.Fulfill();
          onFulfilled.Invoke();
          currentPointNumber = 1;
+         Destroy(osuGameObject);
       }
       else
       {

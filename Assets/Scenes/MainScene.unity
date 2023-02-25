@@ -620,7 +620,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeContainer: {fileID: 420429605}
-  dotPrefab: {fileID: 5088901317344255060, guid: 90cd39c7cae75f14193011262a21f713, type: 3}
+  osuPanelContainerPrefab: {fileID: 5088901317344255060, guid: 90cd39c7cae75f14193011262a21f713, type: 3}
+  dotPrefab: {fileID: 1313111835869968035, guid: 31656a594bf546343bf8be62300f61b6, type: 3}
   onFailure:
     m_PersistentCalls:
       m_Calls: []
