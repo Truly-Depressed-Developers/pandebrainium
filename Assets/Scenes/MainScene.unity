@@ -600,4 +600,5 @@ MonoBehaviour:
   challengeBasePrefab: {fileID: 4829506274169032016, guid: d77943eda1f653046ad348e788f8de79, type: 3}
   challengePrefabList:
   - {fileID: 1539695524954556726, guid: 6fff50c9744c8884b817daac70556c46, type: 3}
+  - {fileID: 8496924203118068487, guid: 4187b5b2e112140488479484e05a5dd3, type: 3}
   challengeContainer: {fileID: 420429605}
