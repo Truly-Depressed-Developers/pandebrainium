@@ -859,6 +859,7 @@ MonoBehaviour:
   challengeBasePrefab: {fileID: 4829506274169032016, guid: d77943eda1f653046ad348e788f8de79, type: 3}
   challengePrefabList:
   - {fileID: 5088901317344255060, guid: 90cd39c7cae75f14193011262a21f713, type: 3}
+  - {fileID: 1539695524954556726, guid: 6fff50c9744c8884b817daac70556c46, type: 3}
   challengeContainer: {fileID: 420429605}
   spawnAreaPanel: {fileID: 1700400047}
   osuTaskManager: {fileID: 1676137741}
@@ -982,5 +983,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
