@@ -3,46 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Challenge : MonoBehaviour
-{
-   public event Action OnTaskFulfilled;
-   public event Action OnTaskFailure;
+public class Challenge : MonoBehaviour {
+    [SerializeField] RectTransform timerForeground;
+    [SerializeField] RectTransform timerBackground;
 
-   [SerializeField] float taskTime = 3f;
-   float startTime;
+    public event Action OnTaskFulfilled;
+    public event Action OnTaskFailure;
 
-   // Add logic
-   private void Start()
-   {
-      startTime = Time.time;
-   }
+    public void ChallengeFulfilled() {
+        OnTaskFulfilled?.Invoke();
+        Destroy(this.gameObject);
+    }
 
-   private void Update()
-   {
-      CheckTaskDeath();
-   }
+    public void ChallengeFailed() {
+        OnTaskFailure?.Invoke();
+        Destroy(this.gameObject);
+    }
 
-   [ContextMenu("Complete Task")]
-   public void FulfillTask()
-   {
-      // Invoke the event
-      Debug.Log("Invoking FulfullTask");
-      Debug.Log(OnTaskFulfilled);
-      OnTaskFulfilled?.Invoke();
-
-
-      // Do other stuff
-
-
-      // Close task
-      Destroy(this.gameObject);
-   }
-
-   public void CheckTaskDeath()
-   {
-      if (Time.time - startTime < taskTime) return;
-
-      OnTaskFailure?.Invoke();
-      Destroy(this.gameObject);
-   }
+    public void SetTimer(float maxTime, float currentTime) {
+        Debug.Log(currentTime + " | " + maxTime + " | " + timerBackground.sizeDelta.x);
+        timerForeground.sizeDelta = new Vector2(
+            (currentTime / maxTime) * timerBackground.rect.width,
+            timerForeground.sizeDelta.y
+            );
+    }
 }

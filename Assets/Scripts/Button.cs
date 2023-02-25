@@ -13,7 +13,7 @@ public class Button : MonoBehaviour
    private int maxClickCount;
    private int clickCounter = 0;
 
-   [SerializeField] private Challenge challengeScript;
+   [SerializeField] private ChallengeTrigger challengeScript;
 
 
    // Start is called before the first frame update
@@ -38,9 +38,7 @@ public class Button : MonoBehaviour
       if(clickCounter >= maxClickCount){
          clickCounter = maxClickCount;
 
-         challengeScript.FulfillTask();
-
-         Debug.Log("Done");
+         challengeScript.Fulfill();
       } ;
       
       buttonText.SetText(clickCounter.ToString());
