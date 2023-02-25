@@ -386,6 +386,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8982759119792963276, guid: a28a815caef72d64fa002dbc88d3eec8, type: 3}
   m_PrefabInstance: {fileID: 77705800}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &162348793 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588411026086367999, guid: a28a815caef72d64fa002dbc88d3eec8, type: 3}
+  m_PrefabInstance: {fileID: 1700242423}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &189051047
 GameObject:
   m_ObjectHideFlags: 0
@@ -809,6 +820,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367881546}
   m_CullTransparentMesh: 1
+--- !u!114 &404791878 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588411026086367999, guid: a28a815caef72d64fa002dbc88d3eec8, type: 3}
+  m_PrefabInstance: {fileID: 77705800}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &420429604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,6 +1347,17 @@ MonoBehaviour:
   m_Spacing: {x: 82.7, y: 0}
   m_Constraint: 0
   m_ConstraintCount: 2
+--- !u!114 &692658673 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588411026086367999, guid: a28a815caef72d64fa002dbc88d3eec8, type: 3}
+  m_PrefabInstance: {fileID: 1909526569}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &889508955
 GameObject:
   m_ObjectHideFlags: 0
@@ -1834,7 +1867,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8276ebc39c21e104a8f607632645abe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  budget: 200
+  budget: 1000
+  sanity: 20
+  changeEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1179263405
 Transform:
   m_ObjectHideFlags: 0
@@ -2180,6 +2217,17 @@ RectTransform:
   m_AnchoredPosition: {x: -504.1, y: 48.27}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1477744120 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1588411026086367999, guid: a28a815caef72d64fa002dbc88d3eec8, type: 3}
+  m_PrefabInstance: {fileID: 1131713520}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1604924790
 GameObject:
   m_ObjectHideFlags: 0
@@ -2843,6 +2891,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   brainDataContainerPrefab: {fileID: 4866441368608768446, guid: a259e86df21f1f349a6ad0e6ccef881f, type: 3}
   brainRowContainer: {fileID: 649193576}
+  dexterityValue: {fileID: 162348793}
+  intelligenceValue: {fileID: 692658673}
+  strengthValue: {fileID: 404791878}
+  sanityValue: {fileID: 1477744120}
+  moneyCountValue: {fileID: 640200151}
 --- !u!114 &1830240724
 MonoBehaviour:
   m_ObjectHideFlags: 0
