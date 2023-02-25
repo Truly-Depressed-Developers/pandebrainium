@@ -62,10 +62,8 @@ public class ChallengeManager : MonoBehaviour {
         challengePanel.SetParent(challengeBaseDisplay);
         challengePanel.GetComponent<RectTransform>().localPosition = Vector3.zero;
 
-
         // Calculate spawn position
         Vector2 challengePanelSize = challengeBaseSize;
-
 
         // TODO: Get the available spawn range from somewhere
         Vector2 maxSpawnRange = new(1920, 1080);
@@ -77,7 +75,7 @@ public class ChallengeManager : MonoBehaviour {
         Debug.Log(randomX + " - " + randomY);
 
         // Move the challenge panel
-        challengeBase.transform.localPosition = new Vector3(randomX, randomY, challengeBase.transform.localPosition.z);
+        challengeBasePanelRect.localPosition = new Vector3(randomX, randomY, challengeBasePanelRect.localPosition.z);
     }
 
     [ContextMenu("Spawn 20 challenges")]

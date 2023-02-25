@@ -210,7 +210,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4829506274169032023}
   - component: {fileID: 3439725925922027459}
-  - component: {fileID: 8733952248177941908}
   m_Layer: 0
   m_Name: ChallengeBase
   m_TagString: Untagged
@@ -248,24 +247,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerForeground: {fileID: 5388800217979085260}
   timerBackground: {fileID: 4829506273436687383}
---- !u!111 &8733952248177941908
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4829506274169032016}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 0b8198dc6129dd940bea5101b8031559, type: 2}
-  - {fileID: 7400000, guid: 4df48dda5ebe10e4483df1285b546a54, type: 2}
-  - {fileID: 7400000, guid: 6aaa4f36f30397a478a65453c8b24e4f, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &8733565606271527412
 GameObject:
   m_ObjectHideFlags: 0
