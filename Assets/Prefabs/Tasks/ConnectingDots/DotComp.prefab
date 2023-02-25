@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1943073353031064790}
   - component: {fileID: 3968526550566665187}
   - component: {fileID: 2792075144378966393}
+  - component: {fileID: 6719566510312924433}
+  - component: {fileID: 5156555358820769158}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -76,6 +78,34 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6719566510312924433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648017596222790517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2a16ff6deb9b7f418b99257894c281a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTime: 60
+--- !u!114 &5156555358820769158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648017596222790517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693029b7b9154cb478e84ef5773c8294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  osuPanelContainer: {fileID: 1648017596222790517}
+  dotPrefab: {fileID: 1313111835869968035, guid: 31656a594bf546343bf8be62300f61b6, type: 3}
+  challengeTrigger: {fileID: 6719566510312924433}
 --- !u!1 &5088901317344255060
 GameObject:
   m_ObjectHideFlags: 0
@@ -85,7 +115,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4641814289329529855}
-  - component: {fileID: 2655259792654161877}
   m_Layer: 0
   m_Name: DotComp
   m_TagString: Untagged
@@ -109,17 +138,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2655259792654161877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5088901317344255060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08abbc93f7f7e7a4f81198ee54c9fcec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timerForeground: {fileID: 0}
-  timerBackground: {fileID: 0}

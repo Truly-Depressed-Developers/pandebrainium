@@ -91,14 +91,14 @@ public class ChallengeManager : MonoBehaviour {
         }
     }
 
-    [ContextMenu("Activate Osu")]
-    void OsuActivate(){
-        osuTaskManager.onFailure.AddListener(OnTaskFailure);
-        osuTaskManager.onFulfilled.AddListener(OnTaskFulfilled);
-        osuTaskManager.Activate();
+    // [ContextMenu("Activate Osu")]
+    // void OsuActivate(){
+    //     osuTaskManager.onFailure.AddListener(OnTaskFailure);
+    //     osuTaskManager.onFulfilled.AddListener(OnTaskFulfilled);
+    //     osuTaskManager.Activate();
 
-        
-    }
+
+    // }
 
     void OnTaskFulfilled() {
         Debug.Log("Task fulfilled.");
