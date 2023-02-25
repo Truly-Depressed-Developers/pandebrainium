@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4641814289329529855}
   m_Layer: 0
-  m_Name: DotComp
+  m_Name: Dots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
