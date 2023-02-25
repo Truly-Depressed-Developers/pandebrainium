@@ -820,7 +820,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1676137739}
   - component: {fileID: 1676137740}
-  - component: {fileID: 1676137741}
   m_Layer: 0
   m_Name: ChallengeManager
   m_TagString: Untagged
@@ -858,25 +857,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   challengeBasePrefab: {fileID: 4829506274169032016, guid: d77943eda1f653046ad348e788f8de79, type: 3}
   challengePrefabList:
+  - {fileID: 1539695524954556726, guid: 6fff50c9744c8884b817daac70556c46, type: 3}
+  - {fileID: 3328492501137057490, guid: 9a75d46d583cb80498b856a9b451f9ca, type: 3}
+  - {fileID: 637695181406026092, guid: 91a00d76a86f3754881846f82b4a4e23, type: 3}
+  - {fileID: 8496924203118068487, guid: 4187b5b2e112140488479484e05a5dd3, type: 3}
   - {fileID: 5088901317344255060, guid: 90cd39c7cae75f14193011262a21f713, type: 3}
   challengeContainer: {fileID: 420429605}
   spawnAreaPanel: {fileID: 1700400047}
-  osuTaskManager: {fileID: 1676137741}
---- !u!114 &1676137741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1676137738}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 693029b7b9154cb478e84ef5773c8294, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  osuPanelContainer: {fileID: 0}
-  dotPrefab: {fileID: 1313111835869968035, guid: 31656a594bf546343bf8be62300f61b6, type: 3}
-  challengeTrigger: {fileID: 0}
+  osuTaskManager: {fileID: 0}
 --- !u!1 &1700400046
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,5 +970,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
