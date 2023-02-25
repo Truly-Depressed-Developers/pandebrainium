@@ -207,6 +207,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &189051047
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 189051048}
+  m_Layer: 0
+  m_Name: BlueButton(Clone)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &189051048
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 189051047}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &420429604
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,7 +597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf3e095ab0a01c4e8833968ed4cad4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  challengeList:
+  challengeBasePrefab: {fileID: 4829506274169032016, guid: d77943eda1f653046ad348e788f8de79, type: 3}
+  challengePrefabList:
   - {fileID: 1539695524954556726, guid: 6fff50c9744c8884b817daac70556c46, type: 3}
-  - {fileID: 8274311493478245415, guid: e76e175c3ddda0b46a1e1770587e946d, type: 3}
   challengeContainer: {fileID: 420429605}

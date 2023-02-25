@@ -22,6 +22,11 @@ public class Challenge : MonoBehaviour
       CheckTaskDeath();
    }
 
+    public void ChallengeFulfilled() {
+        OnTaskFulfilled?.Invoke();
+        Destroy(this.gameObject);
+    }
+
    [ContextMenu("Complete Task")]
    public void FulfillTask()
    {
@@ -45,4 +50,8 @@ public class Challenge : MonoBehaviour
       OnTaskFailure?.Invoke();
       Destroy(this.gameObject);
    }
+    public void ChallengeFailed() {
+        OnTaskFailure?.Invoke();
+        Destroy(this.gameObject);
+    }
 }

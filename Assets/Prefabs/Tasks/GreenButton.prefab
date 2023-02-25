@@ -150,7 +150,7 @@ MonoBehaviour:
   buttonText: {fileID: 3331921987080570952}
   multiplayer: 2
   baseClickCount: 5
-  challengeScript: {fileID: 4340780913902640747}
+  challengeScript: {fileID: 39813875646165903}
 --- !u!1 &3331921987080570934
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +295,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8367726862489623436}
-  - component: {fileID: 4340780913902640747}
   m_Layer: 0
   m_Name: GreenButton
   m_TagString: Untagged
@@ -319,18 +318,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4340780913902640747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8274311493478245415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08abbc93f7f7e7a4f81198ee54c9fcec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8816429098575063609
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,6 +329,7 @@ GameObject:
   - component: {fileID: 2357554866976355145}
   - component: {fileID: 798129445098033145}
   - component: {fileID: 8561052434352948863}
+  - component: {fileID: 39813875646165903}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -408,3 +396,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &39813875646165903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8816429098575063609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2a16ff6deb9b7f418b99257894c281a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
