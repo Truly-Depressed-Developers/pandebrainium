@@ -12,6 +12,8 @@ public class ChallengeManager : MonoBehaviour {
     [SerializeField] List<GameObject> challengePrefabList;
     [SerializeField] Transform challengeContainer;
 
+    [SerializeField] RectTransform spawnAreaPanel;
+
     [ContextMenu("Spawn Random Task")]
     void SpawnTask() {
         if (challengePrefabList == null || challengePrefabList.Count == 0) {
@@ -38,6 +40,7 @@ public class ChallengeManager : MonoBehaviour {
         Challenge challengeBaseChallengeComponent = challengeBase.GetComponent<Challenge>();
         Transform challengeBasePanel = challengeBase.transform.GetChild(0);
         RectTransform challengeBasePanelRect = challengeBasePanel.GetComponent<RectTransform>();
+        Destroy(challenge, 0.1f);
 
 
         // Register events
@@ -65,17 +68,18 @@ public class ChallengeManager : MonoBehaviour {
         // Calculate spawn position
         Vector2 challengePanelSize = challengeBaseSize;
 
-        // TODO: Get the available spawn range from somewhere
-        Vector2 maxSpawnRange = new(1920, 1080);
+        // TODO: Get the available spawn range
+        Vector2 maxSpawnRange = new Vector2(spawnAreaPanel.rect.width, spawnAreaPanel.rect.height);
 
         Vector2 spawnRange = maxSpawnRange - challengePanelSize;
+
         int randomX = (int)(Random.Range(0, spawnRange.x) - spawnRange.x / 2);
         int randomY = (int)(Random.Range(0, spawnRange.y) - spawnRange.y / 2);
 
-        Debug.Log(randomX + " - " + randomY);
+        Debug.Log($"pos: ({randomX},{randomY}), max: ({maxSpawnRange.x},{maxSpawnRange.y}), size: ({challengePanelSize.x},{challengePanelSize.y}), range: ({spawnRange.x},{spawnRange.y})");
 
         // Move the challenge panel
-        challengeBasePanelRect.localPosition = new Vector3(randomX, randomY, challengeBasePanelRect.localPosition.z);
+        challengeBase.transform.localPosition = new Vector3(randomX, randomY, challengeBase.transform.localPosition.z);
     }
 
     [ContextMenu("Spawn 20 challenges")]
