@@ -3764,6 +3764,7 @@ MonoBehaviour:
   - {fileID: 637695181406026092, guid: 91a00d76a86f3754881846f82b4a4e23, type: 3}
   - {fileID: 8496924203118068487, guid: 4187b5b2e112140488479484e05a5dd3, type: 3}
   - {fileID: 5088901317344255060, guid: 90cd39c7cae75f14193011262a21f713, type: 3}
+  - {fileID: 1539695524954556726, guid: 6fff50c9744c8884b817daac70556c46, type: 3}
   challengeContainer: {fileID: 420429605}
   spawnAreaPanel: {fileID: 1700400047}
   osuTaskManager: {fileID: 0}
