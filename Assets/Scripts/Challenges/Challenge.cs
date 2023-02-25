@@ -10,14 +10,25 @@ public class Challenge : MonoBehaviour {
     public event Action OnTaskFulfilled;
     public event Action OnTaskFailure;
 
+    Animator animator;
+
+    private void Start() {
+        animator = GetComponent<Animator>();
+    }
+
     public void ChallengeFulfilled() {
         OnTaskFulfilled?.Invoke();
-        Destroy(this.gameObject);
+        Finish();
     }
 
     public void ChallengeFailed() {
         OnTaskFailure?.Invoke();
-        Destroy(this.gameObject);
+        Finish();
+    }
+
+    private void Finish() {
+        animator.SetTrigger("Finish");
+        Destroy(this.gameObject, 0.2f);
     }
 
     public void SetTimer(float maxTime, float currentTime) {

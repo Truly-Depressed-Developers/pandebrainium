@@ -8,6 +8,7 @@ public class ChallengeTrigger : MonoBehaviour {
     public event Action OnTaskFailure;
     public event Action<float, float> OnTimeTick;
 
+
     [SerializeField] private float maxTime = -1;
     private float currentTime;
 
