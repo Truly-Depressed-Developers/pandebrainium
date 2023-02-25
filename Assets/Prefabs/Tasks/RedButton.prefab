@@ -428,6 +428,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19703bf91d6e1594e91f39c06c938ae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 4973790673003896775}
+  buttonText: {fileID: 4973790673003896775}
   multiplayer: 2
   baseClickCount: 5
+  challengeScript: {fileID: 3547680368527363972}

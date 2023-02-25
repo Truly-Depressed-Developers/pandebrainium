@@ -6,16 +6,19 @@ using UnityEngine.UI;
 
 public class Button : MonoBehaviour
 {
-   [SerializeField] private TMP_Text text;
+   [SerializeField] private TMP_Text buttonText;
    [SerializeField] private float multiplayer = 2.0f;
    [SerializeField] private int baseClickCount = 5;
    private int maxClickCount;
-
    private int clickCounter = 0;
+
+   [SerializeField] private Challenge challengeScript;
 
    // Start is called before the first frame update
    void Start()
    {
+      //challengeScript = gameObject.GetComponent<Challenge>();
+
       maxClickCount = Mathf.FloorToInt(baseClickCount * multiplayer);
       Debug.Log("MAX: " + maxClickCount.ToString());
    }
@@ -33,9 +36,11 @@ public class Button : MonoBehaviour
       if(clickCounter >= maxClickCount){
          clickCounter = maxClickCount;
 
+         challengeScript.FulfillTask();
+
          Debug.Log("Done");
       } ;
       
-      text.SetText(clickCounter.ToString());
+      buttonText.SetText(clickCounter.ToString());
    }
 }
