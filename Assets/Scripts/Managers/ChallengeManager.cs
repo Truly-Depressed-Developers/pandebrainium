@@ -49,6 +49,8 @@ public class ChallengeManager : MonoBehaviour {
         challengeBaseChallengeComponent.OnTaskFulfilled += OnTaskFulfilled;
         challengeBaseChallengeComponent.OnTaskFailure += OnTaskFailure;
 
+        challengeObjectChallengeTrigger.OnTimeTick += challengeBaseChallengeComponent.SetTimer;
+
 
         // Calculate and set challengeBase dimensions
         Vector2 challengeBaseSize = ChallengeManager.CalculateTotalPanelSize(challengeRect.sizeDelta);

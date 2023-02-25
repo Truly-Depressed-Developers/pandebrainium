@@ -39,8 +39,6 @@ public class Button : MonoBehaviour
          clickCounter = maxClickCount;
 
          challengeScript.Fulfill();
-
-         Debug.Log("Done");
       } ;
       
       buttonText.SetText(clickCounter.ToString());
