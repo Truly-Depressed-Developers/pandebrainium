@@ -563,6 +563,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1676137739}
   - component: {fileID: 1676137740}
+  - component: {fileID: 1676137741}
   m_Layer: 0
   m_Name: ChallengeManager
   m_TagString: Untagged
@@ -605,6 +606,27 @@ MonoBehaviour:
   - {fileID: 637695181406026092, guid: 91a00d76a86f3754881846f82b4a4e23, type: 3}
   challengeContainer: {fileID: 420429605}
   spawnAreaPanel: {fileID: 1700400047}
+  osuTaskManager: {fileID: 1676137741}
+--- !u!114 &1676137741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676137738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 693029b7b9154cb478e84ef5773c8294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  challengeContainer: {fileID: 420429605}
+  dotPrefab: {fileID: 5088901317344255060, guid: 90cd39c7cae75f14193011262a21f713, type: 3}
+  onFailure:
+    m_PersistentCalls:
+      m_Calls: []
+  onFulfilled:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1700400046
 GameObject:
   m_ObjectHideFlags: 0
