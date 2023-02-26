@@ -5597,11 +5597,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-<<<<<<< Updated upstream
     rgba: 4294967295
-=======
-    rgba: 4076863487
->>>>>>> Stashed changes
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
