@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerManager : MonoBehaviour
-{
-   public static PlayerManager instance;
+public class PlayerManager : MonoBehaviour {
+    public static PlayerManager instance;
 
-   public DrawBrain.BrainStatistics selectedBrain = new DrawBrain.BrainStatistics();
-   public int budget = 500;
-   public int sanity = 20;
+    public DrawBrain.BrainStatistics selectedBrain = new DrawBrain.BrainStatistics();
+    public int budget = 500;
+    public int sanity = 20;
 
-   public UnityEvent changeEvent;
+    public UnityEvent changeEvent;
 
    // Start is called before the first frame update
    void Start()
@@ -39,6 +38,6 @@ public class PlayerManager : MonoBehaviour
       budget -= selectedBrain.cost;
       sanity += selectedBrain.sanity;
 
-      changeEvent.Invoke();
-   }
+        changeEvent.Invoke();
+    }
 }
