@@ -12,9 +12,9 @@ public class BrainContainer : MonoBehaviour
    {
       brainStatistics = brain;
 
-      var dexterityText = transform.Find("BrainStatsValues/DexterityScore").GetComponent<TMP_Text>();
-      var intelligenceText = transform.Find("BrainStatsValues/IntelligenceScore").GetComponent<TMP_Text>();
-      var strengthText = transform.Find("BrainStatsValues/StrengthScore").GetComponent<TMP_Text>();
+      var dexterityText = transform.Find("BrainStatsValues/Dexterity/ScoreText").GetComponent<TMP_Text>();
+      var intelligenceText = transform.Find("BrainStatsValues/Intelligence/ScoreText").GetComponent<TMP_Text>();
+      var strengthText = transform.Find("BrainStatsValues/Strength/ScoreText").GetComponent<TMP_Text>();
       var costText = transform.Find("Cost").GetComponent<TMP_Text>();
 
       dexterityText.SetText(brainStatistics.dexterity.ToString());
