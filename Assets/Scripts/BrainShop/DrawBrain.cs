@@ -22,9 +22,9 @@ public class DrawBrain
       float levelRandomValue = Random.Range(0f, 1f);
       BrainStatistics brainStatistics = new BrainStatistics();
 
-      brainStatistics.level = levelRandomValue < 0.1f ? 3 : (levelRandomValue < 0.5f ? 2 : 1);
+      brainStatistics.level = levelRandomValue < 0.1f ? 3 : (levelRandomValue < 0.3f ? 2 : 1);
 
-      int statPoint = brainStatistics.level == 3 ? 7 : (brainStatistics.level == 2 ? 5 : 3);
+      int statPoint = (brainStatistics.level == 3 ? 7 : (brainStatistics.level == 2 ? 5 : 3)) - (Random.Range(0f,1f) < 0.5f ? 1 : 0);
 
       for (int i = 0; i < statPoint; i++)
       {
@@ -45,7 +45,7 @@ public class DrawBrain
       }
       brainStatistics.sanity = -brainStatistics.level;
 
-      brainStatistics.cost = Mathf.FloorToInt(statPoint * costPerSkill * Mathf.Pow(LoopManager.instance.currentDay, 1.5f) * Random.Range(0.9f, 1.1f));
+      brainStatistics.cost = Mathf.FloorToInt(Mathf.Pow(statPoint, 1.2f) * costPerSkill * Mathf.Pow(LoopManager.instance.currentDay, 1.5f) * Random.Range(0.9f, 1.1f));
 
       return brainStatistics;
    }
