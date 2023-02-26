@@ -6,6 +6,7 @@ public class MoneyManager : MonoBehaviour
 {
     public static MoneyManager instance;
     private int balance = 500;
+    public int income = 0;
 
     private void Awake()
     {
@@ -26,6 +27,7 @@ public class MoneyManager : MonoBehaviour
     public void gainMoney(int value)
     {
         balance += value;
+        income += value;
     }
 
     public void loseMoney(int value)
