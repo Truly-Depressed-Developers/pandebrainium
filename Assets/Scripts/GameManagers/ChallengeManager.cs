@@ -24,13 +24,13 @@ public class ChallengeManager : MonoBehaviour
 
    public static float GetRandomSpawnDelay(int day)
    {
-      float delay = UnityEngine.Random.Range(2f, Mathf.Max(Mathf.Min(4f / Mathf.Pow(day, 0.3f) + (5f - day * 0.06f), 8), 5));
+      float delay = UnityEngine.Random.Range(1.5f, Mathf.Max(Mathf.Min(4f / Mathf.Pow(day, 0.3f) + (5f - day * 0.06f), 8), 5));
       Debug.Log($"Delay: {delay}");
 
       return delay;
    }
 
-    public float dayTime = 30.0f;
+    public float dayTime = 40.0f;
 
    [SerializeField] GameObject challengeBasePrefab;
    [SerializeField] List<GameObject> challengesStrength;

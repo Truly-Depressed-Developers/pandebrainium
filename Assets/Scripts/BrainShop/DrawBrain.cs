@@ -45,7 +45,7 @@ public class DrawBrain
       }
       brainStatistics.sanity = -brainStatistics.level;
 
-      brainStatistics.cost = Mathf.FloorToInt(Mathf.Pow(1+statPoint, 1.2f) * costPerSkill * Mathf.Pow(LoopManager.instance.currentDay, 1.5f) * Random.Range(0.9f, 1.1f));
+      brainStatistics.cost = Mathf.FloorToInt(Mathf.Pow(1+statPoint, 1.2f) * costPerSkill * Mathf.Pow(Mathf.Max(1f, LoopManager.instance.currentDay), 1.5f) * Random.Range(0.9f, 1.1f));
 
       return brainStatistics;
    }
