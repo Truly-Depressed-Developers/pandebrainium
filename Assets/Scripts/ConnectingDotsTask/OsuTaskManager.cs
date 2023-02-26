@@ -11,14 +11,14 @@ using UnityEngine.Events;
 
 public class OsuTaskManager : MonoBehaviour
 {
-   
+
 
    [SerializeField] GameObject osuPanelContainer;
 
    [SerializeField] GameObject dotPrefab;
 
    [SerializeField] ChallengeTrigger challengeTrigger;
-   
+
 
    int pointCount = 5;
    int currentPointNumber = 1;
@@ -47,7 +47,7 @@ public class OsuTaskManager : MonoBehaviour
 
       Vector2 spawnRange = maxSpawnRange - dotPrefab.GetComponent<RectTransform>().sizeDelta;
 
-      for (int i = pointCount; i >= 1; i--)
+      for (int i = (int)Mathf.Floor(pointCount * challengeTrigger.difficultyMod); i >= 1; i--)
       {
 
          int randomX = (int)(Random.Range(0, spawnRange.x) - spawnRange.x / 2);
