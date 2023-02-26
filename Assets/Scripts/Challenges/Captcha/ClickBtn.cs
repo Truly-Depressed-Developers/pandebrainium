@@ -17,17 +17,6 @@ public class ClickBtn : MonoBehaviour
 
     private int id;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void setId(int val)
     {
@@ -42,6 +31,8 @@ public class ClickBtn : MonoBehaviour
     public void onClick()
     {
         active = !active;
+
+        SoundManager.Instance.playSound_captchaSelect();
 
         GetComponent<Image>().color = active ? activColor : withImg ? noActivColorWithImg : noActivColorNoImg;
         OnClickToParent?.Invoke(id, active);

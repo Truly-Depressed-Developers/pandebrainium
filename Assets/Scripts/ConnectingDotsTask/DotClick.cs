@@ -10,21 +10,8 @@ public class DotClick : MonoBehaviour
 
     public UnityEvent<int> onClickEvent;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     public void ClickHandler(){
-        Debug.Log("Clicked");
+        SoundManager.Instance.playSound_osuClick();
         onClickEvent.Invoke(int.Parse(text.text));
         Destroy(gameObject);
     }
