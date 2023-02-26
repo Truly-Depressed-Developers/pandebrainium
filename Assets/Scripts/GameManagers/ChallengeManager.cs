@@ -170,7 +170,7 @@ public class ChallengeManager : MonoBehaviour
       ChallengeTrigger challengeObjectChallengeTrigger = challengePanel.GetComponent<ChallengeTrigger>();
 
       // Calculate and set difficulty mod
-      float challengeMod = Mathf.Clamp(2 + Mathf.Round(UnityEngine.Random.Range(0, day * 0.1f)), 2, 4);
+      float challengeMod = Mathf.Clamp(2 + Mathf.Round(UnityEngine.Random.Range(0, day * 0.15f)), 2, 4);
       float statDifference = (stat - challengeMod) * UnityEngine.Random.Range(0.8f, 1.2f);
       float differenceMod = GetDifferenceMod(statDifference);
       float sanityMod = GetSanityMod(sanity);
