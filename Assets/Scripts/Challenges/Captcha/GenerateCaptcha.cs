@@ -86,23 +86,28 @@ public class GenerateCaptcha : MonoBehaviour
     {
         InitRandomizingValues();
         InitGenerateButtons();
+
+        for(int i = 0; i < 9; i++)
+        {
+
+            Debug.Log("VAL(" + i + "): " + ((i % 3) * 3 + (3 - 1 - Mathf.FloorToInt(i / 3))));
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    int getRandomRotation()
     {
-
+        return 90 * Random.Range(0, 4);
     }
 
     void checkClickedBtn(int id, bool active)
     {
         if (captchaType == 0)
         {
-            if (imagesFieldData[spriteID][captchaSize - 3][id] == 1)
+            if (id == 1)
             {
                 goodClick += active ? 1 : -1;
             }
-            else if (imagesFieldData[spriteID][captchaSize - 3][id] == 0)
+            else if (id == 0)
             {
                 wrongClick += active ? 1 : -1;
             }
@@ -128,11 +133,15 @@ public class GenerateCaptcha : MonoBehaviour
     void InitRandomizingValues()
     {
         captchaSize = Mathf.Min(maxCaptchaSize, Mathf.FloorToInt(Random.Range(minCaptchaSize, minCaptchaSize * multiplayer + 1)));
-        captchaType = Random.Range(0, maxTypes + 1);
+        captchaType = 1;
+        //captchaType = Random.Range(0, maxTypes + 1);
         if (captchaType == 0)
         {
             spriteID = getRandSpriteId();
+            int rotation = getRandomRotation();
             Sprite sprite = sprites[spriteID];
+            Debug.Log("ROTATION: " + rotation);
+            mainCaptchaImg.transform.Rotate(new Vector3(0, 0, rotation));
             mainCaptchaImg.sprite = sprite;
         }
     }
@@ -151,13 +160,13 @@ public class GenerateCaptcha : MonoBehaviour
     void InitGenerateButtons()
     {
         GridLayoutGroup gridLay = gridPlane.GetComponent<GridLayoutGroup>();
-        gridLay.cellSize = new Vector2(300.0f / captchaSize, 300.0f / captchaSize);
+        gridLay.cellSize = new Vector2(450.0f / captchaSize, 450.0f / captchaSize);
         for (int i = 0; i < Mathf.Pow(captchaSize, 2); i++)
         {
             Button btn = Instantiate(clickBtnPrefab);
             if (captchaType == 0)
             {
-                btn.GetComponent<ClickBtn>().setId(i);
+                btn.GetComponent<ClickBtn>().setId(imagesFieldData[spriteID][captchaSize-3][i]);
             }
             else
             {
@@ -173,6 +182,7 @@ public class GenerateCaptcha : MonoBehaviour
                 btn.GetComponent<ClickBtn>().withImgTrue();
                 btn.image.color = new Color(1, 1, 1, 1);
                 btn.image.sprite = sprites[randSprite];
+                btn.image.transform.Rotate(new Vector3(0, 0, getRandomRotation()));
 
             }
 
@@ -190,6 +200,7 @@ public class GenerateCaptcha : MonoBehaviour
             for (int i = 0; i < Mathf.Pow(captchaSize, 2); i++)
             {
                 if (imagesFieldData[spriteID][captchaSize - 3][i] == 1) ++good;
+                Debug.Log(imagesFieldData[spriteID][captchaSize - 3][i]);
             }
         } else
         {
@@ -208,11 +219,13 @@ public class GenerateCaptcha : MonoBehaviour
 
     void TaskCompleted()
     {
+        Debug.Log("WIN");
         trigger.Fulfill();
     }
 
     void TaskFailed()
     {
+        Debug.Log("LOSE");
         trigger.Fail();
     }
 }
