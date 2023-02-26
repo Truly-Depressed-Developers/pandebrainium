@@ -14,17 +14,17 @@ public class ChallengeManager : MonoBehaviour
 
     public static float GetDifferenceMod(float difference)
     {
-        if (difference > 2) { return 0.7f; } else if (difference <= 2 && difference >= 1) { return Mathf.Lerp(0.7f, 0.9f, 2 - difference); } else if (difference <= 1 && difference >= 0) { return Mathf.Lerp(0.9f, 1f, 1 - difference); } else if (difference <= 0 && difference >= -1) { return Mathf.Lerp(1f, 1.2f, -difference); } else if (difference <= -1 && difference >= -2) { return Mathf.Lerp(1.2f, 1.5f, -1 - difference); } else if (difference <= -2 && difference >= -3) { return Mathf.Lerp(1.5f, 2f, -2 - difference); } else { return 2f; }
+        if (difference > 2) { return 0.7f; } else if (difference <= 2 && difference >= 1) { return Mathf.Lerp(0.7f, 0.9f, 2 - difference); } else if (difference <= 1 && difference >= 0) { return Mathf.Lerp(0.9f, 1f, 1 - difference); } else if (difference <= 0 && difference >= -1) { return Mathf.Lerp(1f, 1.2f, -difference); } else if (difference <= -1 && difference >= -2) { return Mathf.Lerp(1.2f, 1.5f, -1 - difference); } else if (difference <= -2 && difference >= -3) { return Mathf.Lerp(1.5f, 2f, -2 - difference); } else { return 2f - difference/3; }
     }
 
     public static float GetSanityMod(int sanity)
     {
-        return sanity < 0 ? (1 - sanity / 50) : 1;
+        return sanity < 0 ? (1 - sanity / 25) : 1;
     }
 
    public static float GetRandomSpawnDelay(int day)
    {
-      float delay = UnityEngine.Random.Range(1.5f, Mathf.Max(Mathf.Min(4f / Mathf.Pow(day, 0.3f) + (5f - day * 0.06f), 8), 5));
+      float delay = UnityEngine.Random.Range(1.5f, Mathf.Max(Mathf.Min(4f / Mathf.Pow(day, 0.35f) + (5f - day * 0.1f), 8), 4));
       Debug.Log($"Delay: {delay}");
 
         return delay;
@@ -176,7 +176,7 @@ public class ChallengeManager : MonoBehaviour
         ChallengeTrigger challengeObjectChallengeTrigger = challengePanel.GetComponent<ChallengeTrigger>();
 
       // Calculate and set difficulty mod
-      float challengeMod = Mathf.Clamp(2 + Mathf.Round(UnityEngine.Random.Range(0, day * 0.15f)), 2, 4);
+      float challengeMod = Mathf.Clamp(2 + Mathf.Round(UnityEngine.Random.Range(0, day * 0.25f)), 2, 5);
       float statDifference = (stat - challengeMod) * UnityEngine.Random.Range(0.8f, 1.2f);
       float differenceMod = GetDifferenceMod(statDifference);
       float sanityMod = GetSanityMod(sanity);
@@ -224,7 +224,7 @@ public class ChallengeManager : MonoBehaviour
     void OnTaskFulfilled(float difficultyMod, Vector2 position)
     {
         SoundManager.Instance.playSound_taskComplete();
-        int money = Mathf.FloorToInt(100 * Mathf.Pow(difficultyMod, 5 / 3) * UnityEngine.Random.Range(0.9f, 1.1f)) * LoopManager.instance.currentDay;
+        int money = Mathf.FloorToInt(100 * Mathf.Pow(difficultyMod, 5 / 3) * UnityEngine.Random.Range(0.9f, 1.1f) * Mathf.Pow(LoopManager.instance.currentDay, 0.9f));
         MoneyManager.instance.gainMoney(money);
         GameObject fTxt = Instantiate(floatingTxt, challengeContainer);
         fTxt.transform.localPosition = new Vector3(position.x, position.y, fTxt.transform.localPosition.z);

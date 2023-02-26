@@ -76,7 +76,10 @@ public class LoopManager : MonoBehaviour {
         var brain = PlayerManager.instance.selectedBrain;
 
         var sanity = enabledOptionals == true ? -542 : PlayerManager.instance.sanity;
-        Vector3 probabilities = enabledOptionals ? new Vector3(1f, 0, 0) : new Vector3(0.33f, 0.34f, 0.33f);
+        Vector3 probabilities = enabledOptionals ? new Vector3(1f, 0, 0) : new Vector3(
+            ShopManager.instance.drownProbabilities[2],
+            ShopManager.instance.drownProbabilities[0],
+            ShopManager.instance.drownProbabilities[1]);
 
         laptopDisplay.SetActive(true);
         dayStart = Time.time;
