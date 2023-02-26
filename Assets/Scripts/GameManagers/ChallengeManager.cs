@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class ChallengeManager : MonoBehaviour {
     public static ChallengeManager instance;
     public static Vector2 CalculateTotalPanelSize(Vector2 innerSize) {
-        return innerSize + new Vector2(10 + 10, 10 + 10 + 20 + 10);
+        return innerSize + new Vector2(24 + 24, 24 + 46);
     }
 
     public static float GetDifferenceMod(float difference) {
@@ -31,6 +32,10 @@ public class ChallengeManager : MonoBehaviour {
     [SerializeField] Transform challengeContainer;
 
     [SerializeField] RectTransform spawnAreaPanel;
+
+    [SerializeField] Sprite strBorder;
+    [SerializeField] Sprite dexBorder;
+    [SerializeField] Sprite intBorder;
 
     private void Awake() {
         instance = this;
@@ -87,6 +92,7 @@ public class ChallengeManager : MonoBehaviour {
         }
 
         List<GameObject> challengePrefabList = new List<GameObject>[] { challengesStrength, challengesDexterity, challengesIntelligence }[index];
+        Sprite borderSprite = new Sprite[] { strBorder, dexBorder, intBorder }[index];
 
         if (challengePrefabList == null || challengePrefabList.Count == 0) {
             Debug.LogWarning("Tasklist is empty");
@@ -113,6 +119,9 @@ public class ChallengeManager : MonoBehaviour {
         Destroy(challenge, 0.1f);
 
 
+        // Set the border
+        challengeBasePanel.GetChild(0).GetComponent<Image>().sprite = borderSprite;
+
         // Register events
         ChallengeTrigger challengeObjectChallengeTrigger = challengePanel.GetComponent<ChallengeTrigger>();
 
@@ -127,12 +136,13 @@ public class ChallengeManager : MonoBehaviour {
 
         // Calculate and set difficulty mod
         float challengeMod = Mathf.Clamp(2 + Mathf.Round(UnityEngine.Random.Range(0, day * 0.1f)), 2, 4);
+        float statDifference = stat - challengeMod;
+        float differenceMod = GetDifferenceMod(statDifference);
         float sanityMod = GetSanityMod(sanity);
-        float difficultyMod = (stat - challengeMod) * sanityMod;
+        float difficultyMod = differenceMod * sanityMod;
         challengeObjectChallengeTrigger.difficultyMod = difficultyMod;
 
-
-        Debug.Log($"Spawned {randomChallenge.name} with local diff {challengeMod}, sanity mod {sanityMod} and total diff {difficultyMod}");
+        Debug.Log($"Spawned {randomChallenge.name} [ Sdiff {statDifference} -> {differenceMod} | sanity {sanityMod}, Tdiff {difficultyMod} ]");
 
         // Calculate and set challengeBase dimensions
         Vector2 challengeBaseSize = ChallengeManager.CalculateTotalPanelSize(challengeRect.sizeDelta);
@@ -140,7 +150,7 @@ public class ChallengeManager : MonoBehaviour {
 
 
         // Copy challenge prefabs to display
-        Transform challengeBaseDisplay = challengeBase.transform.GetChild(0).GetChild(0);
+        Transform challengeBaseDisplay = challengeBase.transform.GetChild(0).GetChild(1);
         challengePanel.SetParent(challengeBaseDisplay);
         challengePanel.GetComponent<RectTransform>().localPosition = Vector3.zero;
 
