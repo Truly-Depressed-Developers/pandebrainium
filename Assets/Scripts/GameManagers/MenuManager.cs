@@ -32,4 +32,10 @@ public class MenuManager : MonoBehaviour {
     public void Quit() {
         Application.Quit();
     }
+
+    private void Update() {
+        if(Input.GetKeyDown(KeyCode.P)) {
+            PlayerPrefs.DeleteKey("tutorial_completed");
+        }
+    }
 }

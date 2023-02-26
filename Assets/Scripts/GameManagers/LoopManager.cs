@@ -27,6 +27,18 @@ public class LoopManager : MonoBehaviour {
     private bool enabledOptionals = false;
 
     public void StartLoop() {
+        //SoundManager.Instance.playSound_postapoc();
+
+        if(PlayerPrefs.HasKey("tutorial_completed")) {
+            if(PlayerPrefs.GetInt("tutorial_completed") == 1) {
+                enabledOptionals = false;
+            } else {
+                enabledOptionals = true;
+            }
+        } else {
+            enabledOptionals = true;
+        }
+
         if (enabledOptionals == true) {
             currentDay = 0;
         }
@@ -92,6 +104,7 @@ public class LoopManager : MonoBehaviour {
     // Shop
     private void LoopShop() {
         brainShopManager.SpawnBrainsAndSetProbabilitiesList();
+        brainShopManager.UpdatePlayerValues();
         brainShopScreen.SetActive(true);
 
         if (ShopManager.instance.CanBuyAnyBrain() == false) {
@@ -110,6 +123,7 @@ public class LoopManager : MonoBehaviour {
             CutsceneManager.instance.Play(5, (_) => { LoopIntro1(); });
 
             enabledOptionals = false;
+            PlayerPrefs.SetInt("tutorial_completed", 1);
         } else {
             LoopIntro1();
         }

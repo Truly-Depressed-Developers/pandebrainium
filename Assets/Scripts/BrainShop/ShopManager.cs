@@ -83,7 +83,7 @@ public class ShopManager : MonoBehaviour
       strengthProbabilityText.SetText(drownProbabilities[2].ToString() + "%");
    }
 
-   private void UpdatePlayerValues()
+   public void UpdatePlayerValues()
    {
       dexterityValue.SetText(PlayerManager.instance.dexterity.ToString());
       intelligenceValue.SetText(PlayerManager.instance.intelligence.ToString());

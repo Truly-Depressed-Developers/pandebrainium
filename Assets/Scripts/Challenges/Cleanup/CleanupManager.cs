@@ -33,7 +33,7 @@ public class CleanupManager : MonoBehaviour {
         Vector2 panelSize = panel.sizeDelta;
 
         collectedTrash = 0;
-        totalTrash = baseTrash; // * jakies zmienne
+        totalTrash = Mathf.FloorToInt(baseTrash * Mathf.Pow(trigger.difficultyMod, 1.2f));
 
         float zoneSize = zone.rect.width;
         float zoneX = zone.position.x;

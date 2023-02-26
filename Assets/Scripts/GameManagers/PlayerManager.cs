@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
 
    public DrawBrain.BrainStatistics selectedBrain = new DrawBrain.BrainStatistics();
    // public int budget = 500;
-   public int sanity = 20;
+   public int sanity = 8;
 
    public UnityEvent changeEvent;
 

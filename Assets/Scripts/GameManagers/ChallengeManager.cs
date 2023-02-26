@@ -22,15 +22,15 @@ public class ChallengeManager : MonoBehaviour
         return sanity < 0 ? (1 - sanity / 50) : 1;
     }
 
-    public static float GetRandomSpawnDelay(int day)
-    {
-        float delay = UnityEngine.Random.Range(2f, Mathf.Max(Mathf.Min(4f / Mathf.Pow(day, 0.3f) + (5f - day * 0.06f), 8), 5));
-        Debug.Log($"Delay: {delay}");
+   public static float GetRandomSpawnDelay(int day)
+   {
+      float delay = UnityEngine.Random.Range(1.5f, Mathf.Max(Mathf.Min(4f / Mathf.Pow(day, 0.3f) + (5f - day * 0.06f), 8), 5));
+      Debug.Log($"Delay: {delay}");
 
         return delay;
     }
 
-    public float dayTime = 30.0f;
+    public float dayTime = 40.0f;
 
     [SerializeField] GameObject challengeBasePrefab;
     [SerializeField] List<GameObject> challengesStrength;
@@ -69,7 +69,7 @@ public class ChallengeManager : MonoBehaviour
             yield return new WaitForSeconds(dayTime);
         }
 
-        SoundManager.Instance.playSound_endOfTheDay();
+      SoundManager.Instance.playSound_clock();
 
         StopAllCoroutines();
         CleanupChallenges();
@@ -175,13 +175,13 @@ public class ChallengeManager : MonoBehaviour
 
         ChallengeTrigger challengeObjectChallengeTrigger = challengePanel.GetComponent<ChallengeTrigger>();
 
-        // Calculate and set difficulty mod
-        float challengeMod = Mathf.Clamp(2 + Mathf.Round(UnityEngine.Random.Range(0, day * 0.1f)), 2, 4);
-        float statDifference = (stat - challengeMod) * UnityEngine.Random.Range(0.8f, 1.2f);
-        float differenceMod = GetDifferenceMod(statDifference);
-        float sanityMod = GetSanityMod(sanity);
-        float difficultyMod = differenceMod * sanityMod;
-        challengeObjectChallengeTrigger.difficultyMod = difficultyMod;
+      // Calculate and set difficulty mod
+      float challengeMod = Mathf.Clamp(2 + Mathf.Round(UnityEngine.Random.Range(0, day * 0.15f)), 2, 4);
+      float statDifference = (stat - challengeMod) * UnityEngine.Random.Range(0.8f, 1.2f);
+      float differenceMod = GetDifferenceMod(statDifference);
+      float sanityMod = GetSanityMod(sanity);
+      float difficultyMod = differenceMod * sanityMod;
+      challengeObjectChallengeTrigger.difficultyMod = difficultyMod;
 
         Debug.Log($"Spawned {randomChallenge.name} [ Sdiff {statDifference} -> {differenceMod} | sanity {sanityMod}, Tdiff {difficultyMod} ]");
 

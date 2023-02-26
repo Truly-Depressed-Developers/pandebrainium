@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2a16ff6deb9b7f418b99257894c281a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 12
+  maxTime: 10
   difficultyMod: 1
 --- !u!114 &6102881354008820207
 MonoBehaviour:
