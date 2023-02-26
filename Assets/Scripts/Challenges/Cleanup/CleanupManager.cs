@@ -1,35 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class CleanupManager : MonoBehaviour {
 
     [SerializeField] private int baseTrash = 4;
 
-    [SerializeField] GameObject trashPrefab;
+    [SerializeField] GameObject trashPrefab1;
+    [SerializeField] GameObject trashPrefab2;
     [SerializeField] ChallengeTrigger trigger;
     [SerializeField] RectTransform zone;
     [SerializeField] RectTransform panel;
 
+    private List<GameObject> trashPrefabs;
+    private int trashModelIndex;
     private int collectedTrash;
     private int totalTrash;
 
     // Start is called before the first frame update
     void Start() {
+        trashPrefabs = new List<GameObject>() { trashPrefab1, trashPrefab2 };
+        trashModelIndex = Random.Range(0, 2);
+        GameObject currentTrashPrefab = trashPrefabs[trashModelIndex];
+
+        Debug.Log(currentTrashPrefab);
+
         // Position stuff
-        float trashSize = trashPrefab.GetComponent<RectTransform>().rect.width;
+        float trashSize = currentTrashPrefab.GetComponent<RectTransform>().rect.width;
         Vector2 panelSize = panel.sizeDelta;
 
-
         collectedTrash = 0;
-        totalTrash = baseTrash; // * jakieœ zmienne
+        totalTrash = baseTrash; // * jakies zmienne
 
         float zoneSize = zone.rect.width;
         float zoneX = zone.position.x;
         float zoneY = zone.position.y;
 
         for(int i = 0; i < totalTrash; i++) {
-            GameObject trashObject = Instantiate(trashPrefab, transform.parent);
+            GameObject trashObject = Instantiate(currentTrashPrefab, transform.parent);
             Trash trashComponent = trashObject.GetComponent<Trash>();
 
             trashComponent.SetZoneInfo(zoneSize, zoneX, zoneY);
