@@ -5595,9 +5595,9 @@ MonoBehaviour:
   - {fileID: 3328492501137057490, guid: 9a75d46d583cb80498b856a9b451f9ca, type: 3}
   challengeContainer: {fileID: 420429605}
   spawnAreaPanel: {fileID: 1700400047}
-  strBorder: {fileID: 0}
-  dexBorder: {fileID: 0}
-  intBorder: {fileID: 0}
+  strBorder: {fileID: 21300000, guid: b21f46a720abbfb41ae00c1862a2e894, type: 3}
+  dexBorder: {fileID: 21300000, guid: cf15e7d2026792743ac0a3e62fa74ae0, type: 3}
+  intBorder: {fileID: 21300000, guid: 29e8de5798d71c948a71ba95e12a37a3, type: 3}
 --- !u!1001 &1700242423
 PrefabInstance:
   m_ObjectHideFlags: 0
