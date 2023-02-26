@@ -25,17 +25,12 @@ public class GenerateColorObjects : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        multip = GetComponent<ChallengeTrigger>().difficultyMod;
         colorsCount = Mathf.Min(baseColors.Count, Mathf.FloorToInt(baseCount * multip));
 
         RandomColors();
         CreateInfoImgs();
         CreateColorBtns();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void RandomColors()

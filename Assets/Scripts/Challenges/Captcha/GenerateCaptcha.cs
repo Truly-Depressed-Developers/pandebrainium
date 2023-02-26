@@ -84,14 +84,10 @@ public class GenerateCaptcha : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        multiplayer = GetComponent<ChallengeTrigger>().difficultyMod;
+
         InitRandomizingValues();
         InitGenerateButtons();
-
-        for(int i = 0; i < 9; i++)
-        {
-
-            Debug.Log("VAL(" + i + "): " + ((i % 3) * 3 + (3 - 1 - Mathf.FloorToInt(i / 3))));
-        }
     }
 
     int getRandomRotation()
@@ -133,14 +129,12 @@ public class GenerateCaptcha : MonoBehaviour
     void InitRandomizingValues()
     {
         captchaSize = Mathf.Min(maxCaptchaSize, Mathf.FloorToInt(Random.Range(minCaptchaSize, minCaptchaSize * multiplayer + 1)));
-        captchaType = 1;
-        //captchaType = Random.Range(0, maxTypes + 1);
+        captchaType = Random.Range(0, maxTypes + 1);
         if (captchaType == 0)
         {
             spriteID = getRandSpriteId();
             int rotation = getRandomRotation();
             Sprite sprite = sprites[spriteID];
-            Debug.Log("ROTATION: " + rotation);
             mainCaptchaImg.transform.Rotate(new Vector3(0, 0, rotation));
             mainCaptchaImg.sprite = sprite;
         }
@@ -219,13 +213,11 @@ public class GenerateCaptcha : MonoBehaviour
 
     void TaskCompleted()
     {
-        Debug.Log("WIN");
         trigger.Fulfill();
     }
 
     void TaskFailed()
     {
-        Debug.Log("LOSE");
         trigger.Fail();
     }
 }
