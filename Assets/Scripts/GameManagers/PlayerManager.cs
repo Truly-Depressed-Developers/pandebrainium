@@ -12,31 +12,31 @@ public class PlayerManager : MonoBehaviour {
 
     public UnityEvent changeEvent;
 
-    private void Awake() {
-        instance = this;
-    }
-    void Start() {
+   // Start is called before the first frame update
+   void Start()
+   {
+      instance = this;
+   }
 
-        selectedBrain.dexterity = 1;
-        selectedBrain.intelligence = 1;
-        selectedBrain.strength = 1;
-    }
-
-    public int dexterity {
-        get { return selectedBrain.dexterity; }
-    }
-    public int intelligence {
-        get { return selectedBrain.intelligence; }
-    }
-    public int strength {
-        get { return selectedBrain.strength; }
-    }
+   public int dexterity
+   {
+      get { return selectedBrain.dexterity + 1; }
+   }
+   public int intelligence
+   {
+      get { return selectedBrain.intelligence + 1; }
+   }
+   public int strength
+   {
+      get { return selectedBrain.strength + 1; }
+   }
 
 
-    public void ReceiveBrain(DrawBrain.BrainStatistics brain) {
-        selectedBrain = brain;
-        budget -= selectedBrain.cost;
-        sanity += selectedBrain.sanity;
+   public void ReceiveBrain(DrawBrain.BrainStatistics brain)
+   {
+      selectedBrain = brain;
+      budget -= selectedBrain.cost;
+      sanity += selectedBrain.sanity;
 
         changeEvent.Invoke();
     }
