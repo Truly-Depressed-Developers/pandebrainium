@@ -100,7 +100,7 @@ public class ShopManager : MonoBehaviour
 
     public bool CanBuyAnyBrain() {
         foreach(DrawBrain.BrainStatistics bs in brainStatisticsList) {
-            if(PlayerManager.instance.budget >= bs.cost) {
+            if(MoneyManager.instance.getBalance() >= bs.cost) {
                 return true;
             }
         }

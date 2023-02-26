@@ -5,7 +5,7 @@ using UnityEngine;
 public class MoneyManager : MonoBehaviour
 {
     public static MoneyManager instance;
-    private int balance = 0;
+    private int balance = 500;
 
     private void Awake()
     {
