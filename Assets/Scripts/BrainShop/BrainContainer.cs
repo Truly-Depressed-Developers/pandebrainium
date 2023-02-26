@@ -17,6 +17,8 @@ public class BrainContainer : MonoBehaviour
 
    [SerializeField] Image brainImage;
 
+   [SerializeField] TMP_Text buttonText;
+
 
    public void Init(DrawBrain.BrainStatistics brain)
    {
@@ -46,16 +48,29 @@ public class BrainContainer : MonoBehaviour
       {
          brainImage.sprite = strengthBrain;
       }
+
+
+      if (!MoneyManager.instance.canAfford(brainStatistics.cost))
+      {
+         ChangeButtonColor();
+      }
    }
 
-   public void BuyBrain(){
-       BuyBrainCoroutine();
+   [ContextMenu("button color")]
+   void ChangeButtonColor()
+   {
+      buttonText.faceColor = Color.red;
+   }
+
+   public void BuyBrain()
+   {
+      BuyBrainCoroutine();
    }
    public void BuyBrainCoroutine()
    {
       // if (PlayerManager.instance.budget - brainStatistics.cost < 0) return;
       if (!MoneyManager.instance.canAfford(brainStatistics.cost)) return;
-      
+
       SoundManager.Instance.playSound_brainBought();
       PlayerManager.instance.ReceiveBrain(brainStatistics);
 
