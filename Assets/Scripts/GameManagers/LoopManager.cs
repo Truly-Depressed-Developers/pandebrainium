@@ -13,6 +13,8 @@ public class LoopManager : MonoBehaviour {
     [SerializeField] GameObject brainShopScreen;
     [SerializeField] ShopManager brainShopManager;
 
+    [SerializeField] GameObject gameOverScreen;
+
     public int currentDay { get; private set; }
 
     private void Awake() {
@@ -23,7 +25,7 @@ public class LoopManager : MonoBehaviour {
     private bool enabledOptionals = false;
 
     public void StartLoop() {
-        if(enabledOptionals == true) {
+        if (enabledOptionals == true) {
             currentDay = 0;
         }
 
@@ -63,7 +65,7 @@ public class LoopManager : MonoBehaviour {
         Vector3 probabilities = enabledOptionals ? new Vector3(1f, 0, 0) : new Vector3(0.33f, 0.34f, 0.33f);
 
         laptopDisplay.SetActive(true);
-        ChallengeManager.instance.StartDay(1 + brain.strength, 1 + brain.dexterity, 1+brain.intelligence, sanity, currentDay, probabilities,
+        ChallengeManager.instance.StartDay(1 + brain.strength, 1 + brain.dexterity, 1 + brain.intelligence, sanity, currentDay, probabilities,
             () => { laptopDisplay.SetActive(false); LoopScreenOut(); },
             () => { laptopDisplay.SetActive(false); Debug.LogWarning("L"); },
             enabledOptionals
@@ -89,7 +91,12 @@ public class LoopManager : MonoBehaviour {
         brainShopManager.SpawnBrainsAndSetProbabilitiesList();
         brainShopScreen.SetActive(true);
 
-        brainShopManager.OnBuyAnyBrain += () => { brainShopScreen.SetActive(false); LoopIntro3(); };
+        if (ShopManager.instance.CanBuyAnyBrain() == false) {
+            brainShopScreen.SetActive(false);
+            LoopGameOver();
+        } else {
+            brainShopManager.OnBuyAnyBrain += () => { brainShopScreen.SetActive(false); LoopIntro3(); };
+        }
     }
 
     // Intro 3
@@ -103,5 +110,12 @@ public class LoopManager : MonoBehaviour {
         } else {
             LoopIntro1();
         }
+    }
+
+
+    // Game Over
+    private void LoopGameOver() {
+        gameOverScreen.SetActive(true);
+        gameOverScreen.GetComponent<GameOverScreen>().SetText(currentDay, 2137);
     }
 }

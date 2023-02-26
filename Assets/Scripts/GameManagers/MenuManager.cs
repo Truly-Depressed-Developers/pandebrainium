@@ -6,11 +6,26 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour {
 
+    public static MenuManager instance;
+
+    private void Awake() {
+        instance = this;
+    }
+
     [SerializeField] int mainSceneBuildIndex;
 
     public void LoadGame() {
         SceneManager.LoadScene(mainSceneBuildIndex);
-        SceneManager.sceneLoaded += (_,_) => { LoopManager.instance.StartLoop(); };
+        SceneManager.sceneLoaded += LoadGameHandler;
+    }
+
+    private void LoadGameHandler(Scene s, LoadSceneMode lsm) {
+        LoopManager.instance.StartLoop();
+        SceneManager.sceneLoaded -= LoadGameHandler;
+    }
+
+    public void GoBackToMenu() {
+        SceneManager.LoadScene(0);
     }
 
     public void Quit() {

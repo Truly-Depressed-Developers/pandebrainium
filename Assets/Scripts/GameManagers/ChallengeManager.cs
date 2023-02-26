@@ -54,16 +54,12 @@ public class ChallengeManager : MonoBehaviour
       StartCoroutine(ChallengeFactory(strength, dexterity, inteligence, sanity, day, probabilities, tutorial));
    }
 
-   private IEnumerator FinishDayAfterDusk(Action onDayCompleted, bool tutorial)
-   {
-      if (tutorial == true)
-      {
-         yield return new WaitForSeconds(15f);
-      }
-      else
-      {
-         yield return new WaitForSeconds(60f);
-      }
+    private IEnumerator FinishDayAfterDusk(Action onDayCompleted, bool tutorial) {
+        if (tutorial == true) {
+            yield return new WaitForSeconds(15f);
+        } else {
+            yield return new WaitForSeconds(5f);
+        }
 
       SoundManager.Instance.playSound_endOfTheDay();
 

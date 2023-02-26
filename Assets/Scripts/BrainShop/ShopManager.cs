@@ -30,7 +30,7 @@ public class ShopManager : MonoBehaviour
    public List<int> drownProbabilities = new List<int>();
 
    // Start is called before the first frame update
-   void Start()
+   void Awake()
    {
       instance = this;
 
@@ -97,4 +97,14 @@ public class ShopManager : MonoBehaviour
       OnBuyAnyBrain?.Invoke();
       OnBuyAnyBrain = null;
    }
+
+    public bool CanBuyAnyBrain() {
+        foreach(DrawBrain.BrainStatistics bs in brainStatisticsList) {
+            if(PlayerManager.instance.budget >= bs.cost) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
