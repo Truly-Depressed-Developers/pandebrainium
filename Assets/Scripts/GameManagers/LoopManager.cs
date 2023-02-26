@@ -13,6 +13,8 @@ public class LoopManager : MonoBehaviour {
     [SerializeField] GameObject brainShopScreen;
     [SerializeField] ShopManager brainShopManager;
 
+    public float dayStart;
+
     public int currentDay { get; private set; }
 
     private void Awake() {
@@ -63,7 +65,8 @@ public class LoopManager : MonoBehaviour {
         Vector3 probabilities = enabledOptionals ? new Vector3(1f, 0, 0) : new Vector3(0.33f, 0.34f, 0.33f);
 
         laptopDisplay.SetActive(true);
-        ChallengeManager.instance.StartDay(1 + brain.strength, 1 + brain.dexterity, 1+brain.intelligence, sanity, currentDay, probabilities,
+        dayStart = Time.time;
+        ChallengeManager.instance.StartDay(1 + brain.strength, 1 + brain.dexterity, 1+brain.intelligence, PlayerManager.instance.sanity, currentDay, new Vector3(0.5f, 0.25f, 0.25f),
             () => { laptopDisplay.SetActive(false); LoopScreenOut(); },
             () => { laptopDisplay.SetActive(false); Debug.LogWarning("L"); },
             enabledOptionals

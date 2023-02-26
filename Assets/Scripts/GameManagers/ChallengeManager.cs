@@ -25,6 +25,8 @@ public class ChallengeManager : MonoBehaviour {
         return delay;
     }
 
+    public float dayTime = 30f;
+
     [SerializeField] GameObject challengeBasePrefab;
     [SerializeField] List<GameObject> challengesStrength;
     [SerializeField] List<GameObject> challengesDexterity;
