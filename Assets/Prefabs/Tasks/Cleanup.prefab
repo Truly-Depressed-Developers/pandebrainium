@@ -214,7 +214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseTrash: 4
-  trashPrefab: {fileID: 3124384808082364317, guid: 550f6963492a7324e8d8bbeab87ece11, type: 3}
+  trashPrefab1: {fileID: 3124384808082364317, guid: 7d8062300bfeceb4990383b977bf3712, type: 3}
+  trashPrefab2: {fileID: 3124384808082364317, guid: 550f6963492a7324e8d8bbeab87ece11, type: 3}
   trigger: {fileID: 7937549862455791435}
   zone: {fileID: 3407498232532011197}
   panel: {fileID: 6102881354008820206}
