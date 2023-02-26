@@ -172,8 +172,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 120}
-  m_SizeDelta: {x: 240, y: 240}
+  m_AnchoredPosition: {x: 0, y: 265.5}
+  m_SizeDelta: {x: 500, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8401916979879325421
 CanvasRenderer:
@@ -533,6 +533,7 @@ MonoBehaviour:
   intBrain: {fileID: 21300000, guid: a2548ef5de31ea54db8310f4dac40742, type: 3}
   strengthBrain: {fileID: 21300000, guid: 9a651b7ef6098784e9467b7c69fda637, type: 3}
   brainImage: {fileID: 5218428947154046090}
+  buttonText: {fileID: 4614923909636432057}
 --- !u!1 &4917294134119328463
 GameObject:
   m_ObjectHideFlags: 0

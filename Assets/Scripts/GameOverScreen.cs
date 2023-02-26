@@ -11,7 +11,7 @@ public class GameOverScreen : MonoBehaviour
     [SerializeField] Button goBackButton;
 
     private void Start() {
-        goBackButton.onClick.AddListener(() => { Destroy(this.gameObject); MenuManager.instance.GoBackToMenu(); });
+        goBackButton.onClick.AddListener(() => { MenuManager.instance.GoBackToMenu(); });
     }
 
     public void SetText(int days, int earned) {
