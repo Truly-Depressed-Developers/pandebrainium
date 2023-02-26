@@ -88,6 +88,7 @@ public class LoopManager : MonoBehaviour {
 
     // Shop
     private void LoopShop() {
+        brainShopManager.SpawnBrainsAndSetProbabilitiesList();
         brainShopScreen.SetActive(true);
 
         if (ShopManager.instance.CanBuyAnyBrain() == false) {
