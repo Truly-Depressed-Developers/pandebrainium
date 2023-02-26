@@ -1,32 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using TMPro;
 
-public class BrainContainer : MonoBehaviour
-{
-   private DrawBrain.BrainStatistics brainStatistics;
+public class BrainContainer : MonoBehaviour {
+    public event Action OnBuyBrain;
+
+    private DrawBrain.BrainStatistics brainStatistics;
 
 
-   public void Init(DrawBrain.BrainStatistics brain)
-   {
-      brainStatistics = brain;
+    public void Init(DrawBrain.BrainStatistics brain) {
+        brainStatistics = brain;
 
-      var dexterityText = transform.Find("BrainStatsValues/Dexterity/ScoreText").GetComponent<TMP_Text>();
-      var intelligenceText = transform.Find("BrainStatsValues/Intelligence/ScoreText").GetComponent<TMP_Text>();
-      var strengthText = transform.Find("BrainStatsValues/Strength/ScoreText").GetComponent<TMP_Text>();
-      var costText = transform.Find("Cost").GetComponent<TMP_Text>();
+        var dexterityText = transform.Find("BrainStatsValues/Dexterity/ScoreText").GetComponent<TMP_Text>();
+        var intelligenceText = transform.Find("BrainStatsValues/Intelligence/ScoreText").GetComponent<TMP_Text>();
+        var strengthText = transform.Find("BrainStatsValues/Strength/ScoreText").GetComponent<TMP_Text>();
+        var costText = transform.Find("Cost").GetComponent<TMP_Text>();
 
-      dexterityText.SetText(brainStatistics.dexterity.ToString());
-      intelligenceText.SetText(brainStatistics.intelligence.ToString());
-      strengthText.SetText(brainStatistics.strength.ToString());
-      costText.SetText(brainStatistics.cost.ToString() + "$");
-   }
+        dexterityText.SetText(brainStatistics.dexterity.ToString());
+        intelligenceText.SetText(brainStatistics.intelligence.ToString());
+        strengthText.SetText(brainStatistics.strength.ToString());
+        costText.SetText(brainStatistics.cost.ToString() + "$");
+    }
 
-   public void BuyBrain()
-   {
-      if (PlayerManager.instance.budget - brainStatistics.cost < 0) return;
-      SoundManager.Instance.playSound_brainBought();
-      PlayerManager.instance.ReceiveBrain(brainStatistics);
-   }
+    public void BuyBrain() {
+        if (PlayerManager.instance.budget - brainStatistics.cost < 0) return;
+        SoundManager.Instance.playSound_brainBought();
+        PlayerManager.instance.ReceiveBrain(brainStatistics);
+
+        OnBuyBrain?.Invoke();
+    }
 }

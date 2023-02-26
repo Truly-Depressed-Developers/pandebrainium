@@ -8,6 +8,9 @@ public class LoopManager : MonoBehaviour {
 
     [SerializeField] GameObject laptopDisplay;
 
+    [SerializeField] GameObject brainShopScreen;
+    [SerializeField] ShopManager brainShopManager;
+
     private void Awake() {
         instance = this;
     }
@@ -78,7 +81,9 @@ public class LoopManager : MonoBehaviour {
     private void LoopShop() {
         Debug.LogWarning("Start Loop Shop");
 
-        LoopIntro3();
+        brainShopScreen.SetActive(true);
+
+        brainShopManager.OnBuyAnyBrain += () => { brainShopScreen.SetActive(false); LoopIntro3(); };
     }
 
     // Intro 3
