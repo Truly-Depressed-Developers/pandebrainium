@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxTime: 10
+  difficultyMod: 1
 --- !u!1 &5311723073162707179
 GameObject:
   m_ObjectHideFlags: 0

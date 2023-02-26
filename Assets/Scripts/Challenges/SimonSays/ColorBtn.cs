@@ -10,18 +10,6 @@ public class ColorBtn : MonoBehaviour
     private int btnColorId;
     private bool toClick = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void setBtnColorId(int val)
     {
         btnColorId = val;
@@ -34,9 +22,9 @@ public class ColorBtn : MonoBehaviour
 
     public void onClick()
     {
+        SoundManager.Instance.playSound_simonSelect();
         if (toClick)
         {
-            Debug.Log("CLICK");
             OnClickToParent?.Invoke(this.gameObject, btnColorId);
         }
     }
