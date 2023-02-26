@@ -49,18 +49,15 @@ public class BrainContainer : MonoBehaviour
    }
 
    public void BuyBrain(){
-      //StartCoroutine(BuyBrainCoroutine());
        BuyBrainCoroutine();
    }
    public void BuyBrainCoroutine()
-   // public IEnumerator BuyBrainCoroutine()
    {
       // if (PlayerManager.instance.budget - brainStatistics.cost < 0) return;
-      // if (PlayerManager.instance.budget - brainStatistics.cost < 0) return;
+      if (!MoneyManager.instance.canAfford(brainStatistics.cost)) return;
+      
       SoundManager.Instance.playSound_brainBought();
       PlayerManager.instance.ReceiveBrain(brainStatistics);
-
-      //yield return new WaitForSeconds(2f);
 
       OnBuyBrain?.Invoke();
    }
