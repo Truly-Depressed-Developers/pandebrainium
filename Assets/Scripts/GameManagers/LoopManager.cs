@@ -27,6 +27,8 @@ public class LoopManager : MonoBehaviour {
     private bool enabledOptionals = false;
 
     public void StartLoop() {
+        //SoundManager.Instance.playSound_postapoc();
+
         if(PlayerPrefs.HasKey("tutorial_completed")) {
             if(PlayerPrefs.GetInt("tutorial_completed") == 1) {
                 enabledOptionals = false;

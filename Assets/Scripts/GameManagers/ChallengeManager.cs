@@ -63,7 +63,7 @@ public class ChallengeManager : MonoBehaviour
             yield return new WaitForSeconds(dayTime);
         }
 
-      SoundManager.Instance.playSound_endOfTheDay();
+      SoundManager.Instance.playSound_clock();
 
       StopAllCoroutines();
       CleanupChallenges();
