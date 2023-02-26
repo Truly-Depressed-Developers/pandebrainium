@@ -7644,6 +7644,7 @@ MonoBehaviour:
   strBorder: {fileID: 21300000, guid: b21f46a720abbfb41ae00c1862a2e894, type: 3}
   dexBorder: {fileID: 21300000, guid: cf15e7d2026792743ac0a3e62fa74ae0, type: 3}
   intBorder: {fileID: 21300000, guid: 29e8de5798d71c948a71ba95e12a37a3, type: 3}
+  floatingTxt: {fileID: 7897586355119649904, guid: 1aa00946458e3dc479eb3e06c48b35a4, type: 3}
 --- !u!1 &1692517734
 GameObject:
   m_ObjectHideFlags: 0
