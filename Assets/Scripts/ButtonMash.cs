@@ -32,15 +32,10 @@ public class ButtonMash : MonoBehaviour
          challengeScript.Fulfill();
       }
 
-<<<<<<< Updated upstream
-      buttonText.SetText(clickCounter.ToString());
-   }
-=======
         SoundManager.Instance.playSound_buttonMash();
 
         buttonText.SetText(clickCounter.ToString());
     }
->>>>>>> Stashed changes
 
 
 }
