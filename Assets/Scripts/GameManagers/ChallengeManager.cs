@@ -51,7 +51,7 @@ public class ChallengeManager : MonoBehaviour {
         if (tutorial == true) {
             yield return new WaitForSeconds(15f);
         } else {
-            yield return new WaitForSeconds(60f);
+            yield return new WaitForSeconds(5f);
         }
 
         SoundManager.Instance.playSound_endOfTheDay();
