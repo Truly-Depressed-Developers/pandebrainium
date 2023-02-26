@@ -4,39 +4,90 @@ using UnityEngine;
 using System;
 
 public class ChallengeManager : MonoBehaviour {
-
+    public static ChallengeManager instance;
     public static Vector2 CalculateTotalPanelSize(Vector2 innerSize) {
         return innerSize + new Vector2(10 + 10, 10 + 10 + 20 + 10);
     }
 
+    public static float GetDifferenceMod(float difference) {
+        if (difference > 2) { return 0.7f; } else if (difference <= 2 && difference >= 1) { return Mathf.Lerp(0.7f, 0.9f, 2 - difference); } else if (difference <= 1 && difference >= 0) { return Mathf.Lerp(0.9f, 1f, 1 - difference); } else if (difference <= 0 && difference >= -1) { return Mathf.Lerp(1f, 1.2f, -difference); } else if (difference <= -1 && difference >= -2) { return Mathf.Lerp(1.2f, 1.5f, -1 - difference); } else if (difference <= -2 && difference >= -3) { return Mathf.Lerp(1.5f, 2f, -2 - difference); } else { return 2f; }
+    }
+
+    public static float GetSanityMod(int sanity) {
+        return sanity < 0 ? (1 - sanity / 50) : 1;
+    }
+
+    public static float GetRandomSpawnDelay(int day) {
+        float delay = UnityEngine.Random.Range(3f, Mathf.Max(Mathf.Min(4f / Mathf.Pow(day, 0.3f) + (5f - day * 0.06f), 8), 5));
+        Debug.Log($"Delay: {delay}");
+
+        return delay;
+    }
+
     [SerializeField] GameObject challengeBasePrefab;
-    [SerializeField] List<GameObject> challengePrefabList;
+    [SerializeField] List<GameObject> challengesStrength;
+    [SerializeField] List<GameObject> challengesDexterity;
+    [SerializeField] List<GameObject> challengesIntelligence;
     [SerializeField] Transform challengeContainer;
 
     [SerializeField] RectTransform spawnAreaPanel;
 
-    [SerializeField] OsuTaskManager osuTaskManager;
+    private void Awake() {
+        instance = this;
+    }
 
-    public void StartDay(int strength, int dexterity, int inteligence, int sanity, int day, Action onDayCompleted, Action onDayLost) {
+    public void StartDay(int strength, int dexterity, int inteligence, int sanity, int day, Vector3 probabilities, Action onDayCompleted, Action onDayLost) {
+        Debug.LogWarning("Starting day");
         StartCoroutine(FinishDayAfterDusk(onDayCompleted));
-        StartCoroutine(ChallengeFactory(strength, dexterity, inteligence, sanity, day));
+        StartCoroutine(ChallengeFactory(strength, dexterity, inteligence, sanity, day, probabilities));
     }
 
     private IEnumerator FinishDayAfterDusk(Action onDayCompleted) {
-        yield return new WaitForSeconds(120f);
+        yield return new WaitForSeconds(30f);
+        StopAllCoroutines();
+        CleanupChallenges();
         onDayCompleted();
     }
 
-    private IEnumerator ChallengeFactory(int strength, int dexterity, int inteligence, int sanity, int day) {
-        yield return new WaitForSeconds(3f);
+    private void CleanupChallenges() {
+        for (int i = challengeContainer.childCount - 1; i >= 0; i--) {
+            Transform child = challengeContainer.GetChild(i);
 
-        while (true) {
-            yield return new WaitForSeconds(.5f); // Random time
+            if (child.name != "ChallengeSpawnArea") {
+                Destroy(child.gameObject);
+            }
         }
     }
 
-    [ContextMenu("Spawn Random Task")]
-    void SpawnTask() {
+    private IEnumerator ChallengeFactory(int strength, int dexterity, int inteligence, int sanity, int day, Vector3 probabilities) {
+        yield return new WaitForSeconds(3f);
+
+        while (true) {
+            SpawnTask(strength, dexterity, inteligence, sanity, day, probabilities);
+            yield return new WaitForSeconds(GetRandomSpawnDelay(day)); // Random time
+        }
+    }
+
+    void SpawnTask(int strength, int dexterity, int inteligence, int sanity, int day, Vector3 probabilities) {
+        // Pick stat based on probabilities
+
+        int stat = strength;
+        int index = 0;
+
+        float rand = UnityEngine.Random.Range(0f, 1f);
+        if (rand - probabilities.x <= 0) {
+            stat = strength;
+            index = 0;
+        } else if (rand - probabilities.x - probabilities.y <= 0) {
+            stat = dexterity;
+            index = 1;
+        } else {
+            stat = inteligence;
+            index = 2;
+        }
+
+        List<GameObject> challengePrefabList = new List<GameObject>[] { challengesStrength, challengesDexterity, challengesIntelligence }[index];
+
         if (challengePrefabList == null || challengePrefabList.Count == 0) {
             Debug.LogWarning("Tasklist is empty");
             return;
@@ -45,8 +96,6 @@ public class ChallengeManager : MonoBehaviour {
         // Pick random challenge from list
         int randomIndex = UnityEngine.Random.Range(0, challengePrefabList.Count);
         GameObject randomChallenge = challengePrefabList[randomIndex];
-
-        Debug.Log("Spawned task: " + randomChallenge.ToString());
 
 
         // Spawn challenge and grab components
@@ -76,6 +125,15 @@ public class ChallengeManager : MonoBehaviour {
         challengeObjectChallengeTrigger.OnTimeTick += challengeBaseChallengeComponent.SetTimer;
 
 
+        // Calculate and set difficulty mod
+        float challengeMod = Mathf.Clamp(2 + Mathf.Round(UnityEngine.Random.Range(0, day * 0.1f)), 2, 4);
+        float sanityMod = GetSanityMod(sanity);
+        float difficultyMod = (stat - challengeMod) * sanityMod;
+        challengeObjectChallengeTrigger.difficultyMod = difficultyMod;
+
+
+        Debug.Log($"Spawned {randomChallenge.name} with local diff {challengeMod}, sanity mod {sanityMod} and total diff {difficultyMod}");
+
         // Calculate and set challengeBase dimensions
         Vector2 challengeBaseSize = ChallengeManager.CalculateTotalPanelSize(challengeRect.sizeDelta);
         challengeBasePanel.GetComponent<RectTransform>().sizeDelta = challengeBaseSize;
@@ -89,7 +147,8 @@ public class ChallengeManager : MonoBehaviour {
         // Calculate spawn position
         Vector2 challengePanelSize = challengeBaseSize;
 
-        // TODO: Get the available spawn range
+
+        // Get the available spawn range
         Vector2 maxSpawnRange = new Vector2(spawnAreaPanel.rect.width, spawnAreaPanel.rect.height);
 
         Vector2 spawnRange = maxSpawnRange - challengePanelSize;
@@ -97,27 +156,10 @@ public class ChallengeManager : MonoBehaviour {
         int randomX = (int)(UnityEngine.Random.Range(0, spawnRange.x) - spawnRange.x / 2);
         int randomY = (int)(UnityEngine.Random.Range(0, spawnRange.y) - spawnRange.y / 2);
 
-        Debug.Log($"pos: ({randomX},{randomY}), max: ({maxSpawnRange.x},{maxSpawnRange.y}), size: ({challengePanelSize.x},{challengePanelSize.y}), range: ({spawnRange.x},{spawnRange.y})");
 
         // Move the challenge panel
         challengeBase.transform.localPosition = new Vector3(randomX, randomY, challengeBase.transform.localPosition.z);
     }
-
-    [ContextMenu("Spawn 20 challenges")]
-    void SpawnMany() {
-        for (int i = 0; i < 20; i++) {
-            this.SpawnTask();
-        }
-    }
-
-    // [ContextMenu("Activate Osu")]
-    // void OsuActivate(){
-    //     osuTaskManager.onFailure.AddListener(OnTaskFailure);
-    //     osuTaskManager.onFulfilled.AddListener(OnTaskFulfilled);
-    //     osuTaskManager.Activate();
-
-
-    // }
 
     void OnTaskFulfilled() {
         Debug.Log("Task fulfilled.");

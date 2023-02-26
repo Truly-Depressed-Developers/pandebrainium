@@ -11,6 +11,8 @@ public class ChallengeTrigger : MonoBehaviour {
     [SerializeField] private float maxTime = -1;
     private float currentTime;
 
+    public float difficultyMod = 1;
+
     [ContextMenu("Fulfill challenge")]
     public void Fulfill() {
         OnTaskFulfilled?.Invoke();

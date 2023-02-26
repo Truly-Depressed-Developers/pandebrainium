@@ -3959,16 +3959,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   challengeBasePrefab: {fileID: 4829506274169032016, guid: d77943eda1f653046ad348e788f8de79, type: 3}
-  challengePrefabList:
+  challengesStrength:
   - {fileID: 1539695524954556726, guid: 6fff50c9744c8884b817daac70556c46, type: 3}
-  - {fileID: 3328492501137057490, guid: 9a75d46d583cb80498b856a9b451f9ca, type: 3}
   - {fileID: 637695181406026092, guid: 91a00d76a86f3754881846f82b4a4e23, type: 3}
+  challengesDexterity:
   - {fileID: 8496924203118068487, guid: 4187b5b2e112140488479484e05a5dd3, type: 3}
   - {fileID: 5088901317344255060, guid: 90cd39c7cae75f14193011262a21f713, type: 3}
-  - {fileID: 1539695524954556726, guid: 6fff50c9744c8884b817daac70556c46, type: 3}
+  challengesIntelligence:
+  - {fileID: 3328492501137057490, guid: 9a75d46d583cb80498b856a9b451f9ca, type: 3}
   challengeContainer: {fileID: 420429605}
   spawnAreaPanel: {fileID: 1700400047}
-  osuTaskManager: {fileID: 0}
 --- !u!1 &1700400046
 GameObject:
   m_ObjectHideFlags: 0
@@ -4245,6 +4245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ed591e7dacf3445b71272b616a29c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laptopDisplay: {fileID: 72144255}
 --- !u!1 &1835622321
 GameObject:
   m_ObjectHideFlags: 0
