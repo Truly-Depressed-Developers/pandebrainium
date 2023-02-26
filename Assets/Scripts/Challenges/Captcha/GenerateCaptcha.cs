@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class GenerateCaptcha : MonoBehaviour
@@ -16,6 +17,8 @@ public class GenerateCaptcha : MonoBehaviour
 
     [SerializeField] private Sprite[] sprites;
     [SerializeField] private ChallengeTrigger trigger;
+
+    [SerializeField] private TMP_Text txt;
 
     private List<List<List<int>>> imagesFieldData = new List<List<List<int>>>() {
         new List<List<int>>() {
@@ -137,6 +140,7 @@ public class GenerateCaptcha : MonoBehaviour
             Sprite sprite = sprites[spriteID];
             mainCaptchaImg.transform.Rotate(new Vector3(0, 0, rotation));
             mainCaptchaImg.sprite = sprite;
+            txt.SetText(getSearchedAnimalName());
         }
     }
 
@@ -168,6 +172,7 @@ public class GenerateCaptcha : MonoBehaviour
                 if (searchedSpriteId == -1)
                 {
                     searchedSpriteId = randSprite;
+                    txt.SetText(getSearchedAnimalName());
                     ++toFind;
                 }
                 else if (randSprite == searchedSpriteId) ++toFind;
