@@ -24,7 +24,7 @@ public class ChallengeManager : MonoBehaviour
 
    public static float GetRandomSpawnDelay(int day)
    {
-      float delay = UnityEngine.Random.Range(3f, Mathf.Max(Mathf.Min(4f / Mathf.Pow(day, 0.3f) + (5f - day * 0.06f), 8), 5));
+      float delay = UnityEngine.Random.Range(2f, Mathf.Max(Mathf.Min(4f / Mathf.Pow(day, 0.3f) + (5f - day * 0.06f), 8), 5));
       Debug.Log($"Delay: {delay}");
 
       return delay;
@@ -58,7 +58,7 @@ public class ChallengeManager : MonoBehaviour
         if (tutorial == true) {
             yield return new WaitForSeconds(15f);
         } else {
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(40f);
         }
 
       SoundManager.Instance.playSound_endOfTheDay();
@@ -169,7 +169,7 @@ public class ChallengeManager : MonoBehaviour
 
       // Calculate and set difficulty mod
       float challengeMod = Mathf.Clamp(2 + Mathf.Round(UnityEngine.Random.Range(0, day * 0.1f)), 2, 4);
-      float statDifference = stat - challengeMod;
+      float statDifference = (stat - challengeMod) * UnityEngine.Random.Range(0.8f, 1.2f);
       float differenceMod = GetDifferenceMod(statDifference);
       float sanityMod = GetSanityMod(sanity);
       float difficultyMod = differenceMod * sanityMod;
@@ -217,7 +217,7 @@ public class ChallengeManager : MonoBehaviour
    void OnTaskFulfilled(float difficultyMod)
    {
       SoundManager.Instance.playSound_taskComplete();
-      MoneyManager.instance.gainMoney(100 * Mathf.FloorToInt(Mathf.Pow(difficultyMod, 5 / 3)) * LoopManager.instance.currentDay);
+      MoneyManager.instance.gainMoney(Mathf.FloorToInt(100 * Mathf.Pow(difficultyMod, 5 / 3) * UnityEngine.Random.Range(0.9f, 1.1f)) * LoopManager.instance.currentDay);
       Debug.Log("Task fulfilled.");
    }
 

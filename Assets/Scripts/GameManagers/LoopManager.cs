@@ -116,6 +116,6 @@ public class LoopManager : MonoBehaviour {
     // Game Over
     private void LoopGameOver() {
         gameOverScreen.SetActive(true);
-        gameOverScreen.GetComponent<GameOverScreen>().SetText(currentDay, 2137);
+        gameOverScreen.GetComponent<GameOverScreen>().SetText(currentDay, MoneyManager.instance.income);
     }
 }
