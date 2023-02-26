@@ -43,7 +43,7 @@ public class DrawBrain
             brainStatistics.strength++;
          }
       }
-      brainStatistics.sanity = -brainStatistics.level;
+      brainStatistics.sanity = -1;
 
       brainStatistics.cost = statPoint * costPerSkill;
 

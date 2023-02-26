@@ -3,65 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using TMPro;
-using UnityEngine.UI;
 
-public class BrainContainer : MonoBehaviour
-{
-   public event Action OnBuyBrain;
+public class BrainContainer : MonoBehaviour {
+    public event Action OnBuyBrain;
 
-   private DrawBrain.BrainStatistics brainStatistics;
-
-   [SerializeField] Sprite dextBrain;
-   [SerializeField] Sprite intBrain;
-   [SerializeField] Sprite strengthBrain;
-
-   [SerializeField] Image brainImage;
+    private DrawBrain.BrainStatistics brainStatistics;
 
 
-   public void Init(DrawBrain.BrainStatistics brain)
-   {
-      brainStatistics = brain;
+    public void Init(DrawBrain.BrainStatistics brain) {
+        brainStatistics = brain;
 
-      var dexterityText = transform.Find("BrainStatsValues/Dexterity/ScoreText").GetComponent<TMP_Text>();
-      var intelligenceText = transform.Find("BrainStatsValues/Intelligence/ScoreText").GetComponent<TMP_Text>();
-      var strengthText = transform.Find("BrainStatsValues/Strength/ScoreText").GetComponent<TMP_Text>();
-      var costText = transform.Find("Cost").GetComponent<TMP_Text>();
+        var dexterityText = transform.Find("BrainStatsValues/Dexterity/ScoreText").GetComponent<TMP_Text>();
+        var intelligenceText = transform.Find("BrainStatsValues/Intelligence/ScoreText").GetComponent<TMP_Text>();
+        var strengthText = transform.Find("BrainStatsValues/Strength/ScoreText").GetComponent<TMP_Text>();
+        var costText = transform.Find("Cost").GetComponent<TMP_Text>();
 
-      dexterityText.SetText(brainStatistics.dexterity.ToString());
-      intelligenceText.SetText(brainStatistics.intelligence.ToString());
-      strengthText.SetText(brainStatistics.strength.ToString());
-      costText.SetText(brainStatistics.cost.ToString() + "$");
+        dexterityText.SetText(brainStatistics.dexterity.ToString());
+        intelligenceText.SetText(brainStatistics.intelligence.ToString());
+        strengthText.SetText(brainStatistics.strength.ToString());
+        costText.SetText(brainStatistics.cost.ToString() + "$");
+    }
 
-      // var brainImage = transform.GetComponent<Image>();
+    public void BuyBrain() {
+        if (PlayerManager.instance.budget - brainStatistics.cost < 0) return;
+        SoundManager.Instance.playSound_brainBought();
+        PlayerManager.instance.ReceiveBrain(brainStatistics);
 
-      if (brainStatistics.dexterity > brainStatistics.intelligence && brainStatistics.dexterity > brainStatistics.strength)
-      {
-         brainImage.sprite = dextBrain;
-      }
-      else if (brainStatistics.intelligence > brainStatistics.strength)
-      {
-         brainImage.sprite = intBrain;
-      }
-      else
-      {
-         brainImage.sprite = strengthBrain;
-      }
-   }
-
-   public void BuyBrain(){
-      //StartCoroutine(BuyBrainCoroutine());
-       BuyBrainCoroutine();
-   }
-   public void BuyBrainCoroutine()
-   // public IEnumerator BuyBrainCoroutine()
-   {
-      // if (PlayerManager.instance.budget - brainStatistics.cost < 0) return;
-      // if (PlayerManager.instance.budget - brainStatistics.cost < 0) return;
-      SoundManager.Instance.playSound_brainBought();
-      PlayerManager.instance.ReceiveBrain(brainStatistics);
-
-      //yield return new WaitForSeconds(2f);
-
-      OnBuyBrain?.Invoke();
-   }
+        OnBuyBrain?.Invoke();
+    }
 }

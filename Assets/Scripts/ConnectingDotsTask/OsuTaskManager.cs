@@ -67,7 +67,7 @@ public class OsuTaskManager : MonoBehaviour {
         if (number != currentPointNumber) {
             challengeTrigger.Fail();
             currentPointNumber = 1;
-        } else if (number == totalPoints) {
+        } else if (number == basePoints) {
             challengeTrigger.Fulfill();
             currentPointNumber = 1;
         } else {
