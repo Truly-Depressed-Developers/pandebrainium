@@ -2,64 +2,68 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
-public class ShopManager : MonoBehaviour
-{
-   public static ShopManager instance;
+public class ShopManager : MonoBehaviour {
+    public event Action OnBuyAnyBrain;
 
-   [SerializeField] GameObject brainDataContainerPrefab;
-   [SerializeField] Transform brainRowContainer;
+    public static ShopManager instance;
 
-   List<DrawBrain.BrainStatistics> brainStatisticsList = new List<DrawBrain.BrainStatistics>();
+    [SerializeField] GameObject brainDataContainerPrefab;
+    [SerializeField] Transform brainRowContainer;
 
-   // Statistic Screen
-   [SerializeField] TMP_Text dexterityValue;
-   [SerializeField] TMP_Text intelligenceValue;
-   [SerializeField] TMP_Text strengthValue;
-   [SerializeField] TMP_Text sanityValue;
-   [SerializeField] TMP_Text moneyCountValue;
+    List<DrawBrain.BrainStatistics> brainStatisticsList = new List<DrawBrain.BrainStatistics>();
 
-   // Start is called before the first frame update
-   void Start()
-   {
-      instance = this;
+    // Statistic Screen
+    [SerializeField] TMP_Text dexterityValue;
+    [SerializeField] TMP_Text intelligenceValue;
+    [SerializeField] TMP_Text strengthValue;
+    [SerializeField] TMP_Text sanityValue;
+    [SerializeField] TMP_Text moneyCountValue;
 
-      SpawnBrains();
-      UpdatePlayerValues();
+    // Start is called before the first frame update
+    void Start() {
+        instance = this;
 
-      PlayerManager.instance.changeEvent.AddListener(SpawnBrains);
-      PlayerManager.instance.changeEvent.AddListener(UpdatePlayerValues);
-   }
+        SpawnBrains();
+        UpdatePlayerValues();
 
-   private void SpawnBrains()
-   {
-      brainStatisticsList = new List<DrawBrain.BrainStatistics>();
+        PlayerManager.instance.changeEvent.AddListener(SpawnBrains);
+        PlayerManager.instance.changeEvent.AddListener(UpdatePlayerValues);
+    }
 
-      for (int i = 0; i < 3; i++)
-      {
-         var newBrainStatisticData = DrawBrain.DrawRandomBrain();
-         brainStatisticsList.Add(newBrainStatisticData);
-      }
+    private void SpawnBrains() {
+        brainStatisticsList = new List<DrawBrain.BrainStatistics>();
 
-      foreach (Transform childTransform in brainRowContainer) {
-         GameObject.Destroy(childTransform.gameObject);
-      }
+        for (int i = 0; i < 3; i++) {
+            var newBrainStatisticData = DrawBrain.DrawRandomBrain();
+            brainStatisticsList.Add(newBrainStatisticData);
+        }
 
-      foreach (var brainStatistics in brainStatisticsList)
-      {
-         var brainDataGameObject = Instantiate(brainDataContainerPrefab, brainRowContainer);
-         var brainContainerScript = brainDataGameObject.GetComponent<BrainContainer>();
+        foreach (Transform childTransform in brainRowContainer) {
+            GameObject.Destroy(childTransform.gameObject);
+        }
 
-         brainContainerScript.Init(brainStatistics);
-      }
-   }
+        foreach (var brainStatistics in brainStatisticsList) {
+            var brainDataGameObject = Instantiate(brainDataContainerPrefab, brainRowContainer);
+            var brainContainerScript = brainDataGameObject.GetComponent<BrainContainer>();
 
-   private void UpdatePlayerValues()
-   {
-      dexterityValue.SetText(PlayerManager.instance.dexterity.ToString());
-      intelligenceValue.SetText(PlayerManager.instance.intelligence.ToString());
-      strengthValue.SetText(PlayerManager.instance.strength.ToString());
-      sanityValue.SetText(PlayerManager.instance.sanity.ToString());
-      moneyCountValue.SetText(PlayerManager.instance.budget.ToString() + "$");
-   }
+            brainContainerScript.OnBuyBrain += OnBuyBrain;
+
+            brainContainerScript.Init(brainStatistics);
+        }
+    }
+
+    private void UpdatePlayerValues() {
+        dexterityValue.SetText(PlayerManager.instance.dexterity.ToString());
+        intelligenceValue.SetText(PlayerManager.instance.intelligence.ToString());
+        strengthValue.SetText(PlayerManager.instance.strength.ToString());
+        sanityValue.SetText(PlayerManager.instance.sanity.ToString());
+        moneyCountValue.SetText(PlayerManager.instance.budget.ToString() + "$");
+    }
+
+    private void OnBuyBrain() {
+        OnBuyAnyBrain?.Invoke();
+        OnBuyAnyBrain = null;
+    }
 }
