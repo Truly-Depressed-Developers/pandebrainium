@@ -30,11 +30,13 @@ public class ChallengeManager : MonoBehaviour
       return delay;
    }
 
-   [SerializeField] GameObject challengeBasePrefab;
-   [SerializeField] List<GameObject> challengesStrength;
-   [SerializeField] List<GameObject> challengesDexterity;
-   [SerializeField] List<GameObject> challengesIntelligence;
-   [SerializeField] Transform challengeContainer;
+    public float dayTime = 30f;
+
+    [SerializeField] GameObject challengeBasePrefab;
+    [SerializeField] List<GameObject> challengesStrength;
+    [SerializeField] List<GameObject> challengesDexterity;
+    [SerializeField] List<GameObject> challengesIntelligence;
+    [SerializeField] Transform challengeContainer;
 
    [SerializeField] RectTransform spawnAreaPanel;
 
@@ -65,7 +67,7 @@ public class ChallengeManager : MonoBehaviour
          yield return new WaitForSeconds(60f);
       }
 
-      SoundManager.Instance.playSound_endOfTheDay();
+        SoundManager.Instance.playSound_endOfTheDay();    
 
       StopAllCoroutines();
       CleanupChallenges();

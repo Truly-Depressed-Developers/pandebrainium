@@ -13,6 +13,8 @@ public class LoopManager : MonoBehaviour {
     [SerializeField] GameObject brainShopScreen;
     [SerializeField] ShopManager brainShopManager;
 
+    public float dayStart;
+
     public int currentDay { get; private set; }
 
     private void Awake() {
@@ -20,10 +22,10 @@ public class LoopManager : MonoBehaviour {
         instance = this;
     }
 
-    private bool enabledOptionals = false;
+    private bool enableOptional = false;
 
     public void StartLoop() {
-        if(enabledOptionals == true) {
+        if(enableOptional == true) {
             currentDay = 0;
         }
 
@@ -31,12 +33,12 @@ public class LoopManager : MonoBehaviour {
     }
 
     public void SetEnableOptional(bool enable) {
-        enabledOptionals = enable;
+        enableOptional = enable;
     }
 
     // Intro 1
     private void LoopIntro1() {
-        if (enabledOptionals) {
+        if (enableOptional) {
             CutsceneManager.instance.Play(0, (_) => { LoopDayX(); });
         } else {
             LoopDayX();
@@ -59,15 +61,11 @@ public class LoopManager : MonoBehaviour {
     private void LoopLevel() {
         var brain = PlayerManager.instance.selectedBrain;
 
-        var sanity = enabledOptionals == true ? -542 : PlayerManager.instance.sanity;
-        Vector3 probabilities = enabledOptionals ? new Vector3(1f, 0, 0) : new Vector3(0.33f, 0.34f, 0.33f);
-
         laptopDisplay.SetActive(true);
-        ChallengeManager.instance.StartDay(1 + brain.strength, 1 + brain.dexterity, 1+brain.intelligence, sanity, currentDay, probabilities,
+        dayStart = Time.time;
+        ChallengeManager.instance.StartDay(1 + brain.strength, 1 + brain.dexterity, 1+brain.intelligence, PlayerManager.instance.sanity, currentDay, new Vector3(0.5f, 0.25f, 0.25f),
             () => { laptopDisplay.SetActive(false); LoopScreenOut(); },
-            () => { laptopDisplay.SetActive(false); Debug.LogWarning("L"); },
-            enabledOptionals
-            );
+            () => { laptopDisplay.SetActive(false); Debug.LogWarning("L"); });
     }
 
     // Screen OUT
@@ -77,7 +75,7 @@ public class LoopManager : MonoBehaviour {
 
     // Intro 2
     private void LoopIntro2() {
-        if (enabledOptionals) {
+        if (enableOptional) {
             CutsceneManager.instance.Play(4, (_) => { LoopShop(); });
         } else {
             LoopShop();
@@ -96,10 +94,8 @@ public class LoopManager : MonoBehaviour {
     private void LoopIntro3() {
         ++currentDay;
 
-        if (enabledOptionals) {
+        if (enableOptional) {
             CutsceneManager.instance.Play(5, (_) => { LoopIntro1(); });
-
-            enabledOptionals = false;
         } else {
             LoopIntro1();
         }
