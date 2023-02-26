@@ -18,13 +18,15 @@ public class CleanupManager : MonoBehaviour {
     private int collectedTrash;
     private int totalTrash;
 
+    private List<Trash> trashList;
+
     // Start is called before the first frame update
     void Start() {
         trashPrefabs = new List<GameObject>() { trashPrefab1, trashPrefab2 };
         trashModelIndex = Random.Range(0, 2);
         GameObject currentTrashPrefab = trashPrefabs[trashModelIndex];
 
-        Debug.Log(currentTrashPrefab);
+        trashList = new List<Trash>();
 
         // Position stuff
         float trashSize = currentTrashPrefab.GetComponent<RectTransform>().rect.width;
@@ -40,6 +42,7 @@ public class CleanupManager : MonoBehaviour {
         for(int i = 0; i < totalTrash; i++) {
             GameObject trashObject = Instantiate(currentTrashPrefab, transform.parent);
             Trash trashComponent = trashObject.GetComponent<Trash>();
+            trashList.Add(trashComponent);
 
             trashComponent.SetZoneInfo(zoneSize, zoneX, zoneY);
 
@@ -64,6 +67,14 @@ public class CleanupManager : MonoBehaviour {
     void Update() {
         if(collectedTrash == totalTrash) {
             trigger.Fulfill();
+        }
+
+        float zoneSize = zone.rect.width;
+        float zoneX = zone.position.x;
+        float zoneY = zone.position.y;
+
+        foreach(Trash t in trashList) {
+            t.SetZoneInfo(zoneSize, zoneX, zoneY);
         }
     }
 
