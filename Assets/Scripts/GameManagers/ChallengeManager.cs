@@ -41,16 +41,20 @@ public class ChallengeManager : MonoBehaviour {
         instance = this;
     }
 
-    public void StartDay(int strength, int dexterity, int inteligence, int sanity, int day, Vector3 probabilities, Action onDayCompleted, Action onDayLost) {
+    public void StartDay(int strength, int dexterity, int inteligence, int sanity, int day, Vector3 probabilities, Action onDayCompleted, Action onDayLost, bool tutorial = false) {
         Debug.LogWarning("Starting day");
-        StartCoroutine(FinishDayAfterDusk(onDayCompleted));
-        StartCoroutine(ChallengeFactory(strength, dexterity, inteligence, sanity, day, probabilities));
+        StartCoroutine(FinishDayAfterDusk(onDayCompleted, tutorial));
+        StartCoroutine(ChallengeFactory(strength, dexterity, inteligence, sanity, day, probabilities, tutorial));
     }
 
-    private IEnumerator FinishDayAfterDusk(Action onDayCompleted) {
-        yield return new WaitForSeconds(30f);
+    private IEnumerator FinishDayAfterDusk(Action onDayCompleted, bool tutorial) {
+        if (tutorial == true) {
+            yield return new WaitForSeconds(15f);
+        } else {
+            yield return new WaitForSeconds(60f);
+        }
 
-        SoundManager.Instance.playSound_endOfTheDay();    
+        SoundManager.Instance.playSound_endOfTheDay();
 
         StopAllCoroutines();
         CleanupChallenges();
@@ -67,16 +71,21 @@ public class ChallengeManager : MonoBehaviour {
         }
     }
 
-    private IEnumerator ChallengeFactory(int strength, int dexterity, int inteligence, int sanity, int day, Vector3 probabilities) {
+    private IEnumerator ChallengeFactory(int strength, int dexterity, int inteligence, int sanity, int day, Vector3 probabilities, bool tutorial) {
         yield return new WaitForSeconds(3f);
 
         while (true) {
-            SpawnTask(strength, dexterity, inteligence, sanity, day, probabilities);
-            yield return new WaitForSeconds(GetRandomSpawnDelay(day)); // Random time
+            SpawnTask(strength, dexterity, inteligence, sanity, day, probabilities, tutorial);
+
+            if (tutorial == true) {
+                yield return new WaitForSeconds(3600f);
+            } else {
+                yield return new WaitForSeconds(GetRandomSpawnDelay(day)); // Random time
+            }
         }
     }
 
-    void SpawnTask(int strength, int dexterity, int inteligence, int sanity, int day, Vector3 probabilities) {
+    void SpawnTask(int strength, int dexterity, int inteligence, int sanity, int day, Vector3 probabilities, bool tutorial) {
         SoundManager.Instance.playSound_taskSpawn();
         // Pick stat based on probabilities
 
@@ -107,6 +116,13 @@ public class ChallengeManager : MonoBehaviour {
         int randomIndex = UnityEngine.Random.Range(0, challengePrefabList.Count);
         GameObject randomChallenge = challengePrefabList[randomIndex];
 
+
+        // TUTORIAL OVERRIDE
+        if(tutorial == true) {
+            stat = strength;
+            index = 0;
+            randomChallenge = challengesStrength[0]; // ButtonMash
+        }
 
         // Spawn challenge and grab components
         GameObject challenge = Instantiate(randomChallenge);
