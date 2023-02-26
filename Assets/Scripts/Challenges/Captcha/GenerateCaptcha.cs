@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class GenerateCaptcha : MonoBehaviour
@@ -16,6 +17,8 @@ public class GenerateCaptcha : MonoBehaviour
 
     [SerializeField] private Sprite[] sprites;
     [SerializeField] private ChallengeTrigger trigger;
+
+    [SerializeField] private TMP_Text txt;
 
     private List<List<List<int>>> imagesFieldData = new List<List<List<int>>>() {
         new List<List<int>>() {
@@ -137,6 +140,7 @@ public class GenerateCaptcha : MonoBehaviour
             Sprite sprite = sprites[spriteID];
             mainCaptchaImg.transform.Rotate(new Vector3(0, 0, rotation));
             mainCaptchaImg.sprite = sprite;
+            txt.SetText("CHECK: " + getSearchedAnimalName());
         }
     }
 
@@ -160,7 +164,7 @@ public class GenerateCaptcha : MonoBehaviour
             Button btn = Instantiate(clickBtnPrefab);
             if (captchaType == 0)
             {
-                btn.GetComponent<ClickBtn>().setId(imagesFieldData[spriteID][captchaSize-3][i]);
+                btn.GetComponent<ClickBtn>().setId(imagesFieldData[spriteID][captchaSize - 3][i]);
             }
             else
             {
@@ -168,6 +172,7 @@ public class GenerateCaptcha : MonoBehaviour
                 if (searchedSpriteId == -1)
                 {
                     searchedSpriteId = randSprite;
+                    txt.SetText("CHECK: " + getSearchedAnimalName());
                     ++toFind;
                 }
                 else if (randSprite == searchedSpriteId) ++toFind;
@@ -194,9 +199,9 @@ public class GenerateCaptcha : MonoBehaviour
             for (int i = 0; i < Mathf.Pow(captchaSize, 2); i++)
             {
                 if (imagesFieldData[spriteID][captchaSize - 3][i] == 1) ++good;
-                Debug.Log(imagesFieldData[spriteID][captchaSize - 3][i]);
             }
-        } else
+        }
+        else
         {
             good = toFind;
         }

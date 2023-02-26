@@ -30,6 +30,8 @@ public class ChallengeManager : MonoBehaviour
       return delay;
    }
 
+    public float dayTime = 30.0f;
+
    [SerializeField] GameObject challengeBasePrefab;
    [SerializeField] List<GameObject> challengesStrength;
    [SerializeField] List<GameObject> challengesDexterity;
@@ -58,7 +60,7 @@ public class ChallengeManager : MonoBehaviour
         if (tutorial == true) {
             yield return new WaitForSeconds(15f);
         } else {
-            yield return new WaitForSeconds(40f);
+            yield return new WaitForSeconds(dayTime);
         }
 
       SoundManager.Instance.playSound_endOfTheDay();
