@@ -7,11 +7,18 @@ using System;
 public class CutsceneManager : MonoBehaviour {
 
     [SerializeField] List<Canvas> cutscenes;
+    private List<bool> alreadySubscribed;
 
     public static CutsceneManager instance;
 
     void Awake() {
         instance = this;
+
+        alreadySubscribed = new List<bool>();
+
+        for(int i = 0; i < cutscenes.Count; i++) {
+            alreadySubscribed.Add(false);
+        }
     }
 
     public void Play(int index, Action<PlayableDirector> onStopped) {
@@ -29,8 +36,12 @@ public class CutsceneManager : MonoBehaviour {
 
         Debug.Log("Playing " + playableDirector.name);
         playableDirector.Play();
+        
+        if(alreadySubscribed[index] == false) {
+            playableDirector.stopped += (PlayableDirector _) => { canvas.gameObject.SetActive(false); };
+            playableDirector.stopped += onStopped;
 
-        playableDirector.stopped += (PlayableDirector _) => { canvas.gameObject.SetActive(false) ; };
-        playableDirector.stopped += onStopped;
+            alreadySubscribed[index] = true;
+        }
     }
 }

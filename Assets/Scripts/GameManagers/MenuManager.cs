@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour {
 
     public void LoadGame() {
         SceneManager.LoadScene(mainSceneBuildIndex);
+        SceneManager.sceneLoaded += (_,_) => { LoopManager.instance.StartLoop(); };
     }
 
     public void Quit() {
