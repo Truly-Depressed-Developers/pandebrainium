@@ -4,11 +4,7 @@ using UnityEngine;
 using TMPro;
 
 public class DayCounter : MonoBehaviour {
-    private TMP_Text textElement;
-
-    private void Start() {
-        textElement = GetComponent<TMP_Text>();
-    }
+    [SerializeField] private TMP_Text textElement;
 
     public void SetText(int day) {
         textElement.text = $"Day {day}";

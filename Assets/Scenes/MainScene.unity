@@ -1371,6 +1371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0aa20ec712c2284da02f4016cd71298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textElement: {fileID: 299239874}
 --- !u!1 &299246117
 GameObject:
   m_ObjectHideFlags: 0
@@ -6309,6 +6310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laptopDisplay: {fileID: 72144255}
+  dayCounter: {fileID: 299239877}
   brainShopScreen: {fileID: 1830240722}
   brainShopManager: {fileID: 1830240723}
 --- !u!1 &1830240722
