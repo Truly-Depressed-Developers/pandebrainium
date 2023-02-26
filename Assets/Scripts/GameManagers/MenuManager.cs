@@ -26,6 +26,7 @@ public class MenuManager : MonoBehaviour {
 
     public void GoBackToMenu() {
         SceneManager.LoadScene(0);
+        Destroy(this.gameObject);
     }
 
     public void Quit() {
