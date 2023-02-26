@@ -25,6 +25,8 @@ public class ChallengeManager : MonoBehaviour {
         return delay;
     }
 
+    public float dayTime = 30f;
+
     [SerializeField] GameObject challengeBasePrefab;
     [SerializeField] List<GameObject> challengesStrength;
     [SerializeField] List<GameObject> challengesDexterity;
@@ -48,7 +50,7 @@ public class ChallengeManager : MonoBehaviour {
     }
 
     private IEnumerator FinishDayAfterDusk(Action onDayCompleted) {
-        yield return new WaitForSeconds(30f);
+        yield return new WaitForSeconds(dayTime);
 
         SoundManager.Instance.playSound_endOfTheDay();    
 
