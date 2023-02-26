@@ -26,6 +26,7 @@ public class BrainContainer : MonoBehaviour
    public void BuyBrain()
    {
       if (PlayerManager.instance.budget - brainStatistics.cost < 0) return;
+      SoundManager.Instance.playSound_brainBought();
       PlayerManager.instance.ReceiveBrain(brainStatistics);
    }
 }

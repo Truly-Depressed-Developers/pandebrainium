@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MovableUIElement : MonoBehaviour, IDragHandler {
+public class MovableUIElement : MonoBehaviour, IDragHandler, IBeginDragHandler {
     public void OnDrag(PointerEventData eventData) {
         transform.position = new Vector3(
             transform.position.x + eventData.delta.x,
@@ -11,4 +11,13 @@ public class MovableUIElement : MonoBehaviour, IDragHandler {
             transform.position.z + 0
             );
     }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        if (this.gameObject.name == "Trash(Clone)")
+        {
+            SoundManager.Instance.playSound_cleanup_swipe1();
+        }
+    }
+
 }

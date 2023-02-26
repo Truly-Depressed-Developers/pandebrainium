@@ -49,6 +49,9 @@ public class ChallengeManager : MonoBehaviour {
 
     private IEnumerator FinishDayAfterDusk(Action onDayCompleted) {
         yield return new WaitForSeconds(30f);
+
+        SoundManager.Instance.playSound_endOfTheDay();    
+
         StopAllCoroutines();
         CleanupChallenges();
         onDayCompleted();
@@ -74,6 +77,7 @@ public class ChallengeManager : MonoBehaviour {
     }
 
     void SpawnTask(int strength, int dexterity, int inteligence, int sanity, int day, Vector3 probabilities) {
+        SoundManager.Instance.playSound_taskSpawn();
         // Pick stat based on probabilities
 
         int stat = strength;
@@ -172,10 +176,12 @@ public class ChallengeManager : MonoBehaviour {
     }
 
     void OnTaskFulfilled() {
+        SoundManager.Instance.playSound_taskComplete();
         Debug.Log("Task fulfilled.");
     }
 
     void OnTaskFailure() {
+        SoundManager.Instance.playSound_taskFailed();
         Debug.Log("Task failed successfully.");
     }
 }
