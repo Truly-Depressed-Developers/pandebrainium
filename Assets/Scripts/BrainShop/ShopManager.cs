@@ -27,7 +27,7 @@ public class ShopManager : MonoBehaviour
    [SerializeField] TMP_Text intelligenceProbabilityText;
    [SerializeField] TMP_Text strengthProbabilityText;
 
-   private List<int> drownProbabilities = new List<int>();
+   public List<int> drownProbabilities = new List<int>();
 
    // Start is called before the first frame update
    void Start()
@@ -37,12 +37,12 @@ public class ShopManager : MonoBehaviour
       SpawnBrainsAndSetProbabilitiesList();
       UpdatePlayerValues();
 
-      PlayerManager.instance.changeEvent.AddListener(SpawnBrainsAndSetProbabilitiesList);
+    //   PlayerManager.instance.changeEvent.AddListener(SpawnBrainsAndSetProbabilitiesList);
       PlayerManager.instance.changeEvent.AddListener(UpdatePlayerValues);
    }
 
    [ContextMenu("Random brains and probabilities")]
-   private void SpawnBrainsAndSetProbabilitiesList()
+   public void SpawnBrainsAndSetProbabilitiesList()
    {
       brainStatisticsList = new List<DrawBrain.BrainStatistics>();
 
@@ -89,7 +89,7 @@ public class ShopManager : MonoBehaviour
       intelligenceValue.SetText(PlayerManager.instance.intelligence.ToString());
       strengthValue.SetText(PlayerManager.instance.strength.ToString());
       sanityValue.SetText(PlayerManager.instance.sanity.ToString());
-      moneyCountValue.SetText(PlayerManager.instance.budget.ToString() + "$");
+      moneyCountValue.SetText(MoneyManager.instance.getBalance().ToString() + "$");
    }
 
    private void OnBuyBrain()

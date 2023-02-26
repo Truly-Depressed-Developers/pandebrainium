@@ -38,14 +38,14 @@ public class DrawBrain
          {
             brainStatistics.intelligence++;
          }
-         else if(statisticRandomValue == 2)
+         else if (statisticRandomValue == 2)
          {
             brainStatistics.strength++;
          }
       }
       brainStatistics.sanity = -brainStatistics.level;
 
-      brainStatistics.cost = statPoint * costPerSkill;
+      brainStatistics.cost = Mathf.FloorToInt(statPoint * costPerSkill * Mathf.Pow(LoopManager.instance.currentDay, 4/3));
 
       return brainStatistics;
    }
