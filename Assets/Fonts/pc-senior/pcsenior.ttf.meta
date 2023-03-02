@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: d9c1bcb02b7f1c64f9df1e35e6acc37c
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - PC Senior
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 09e5ac3ecc2bca44eb7c82e9a8414c94, type: 3}
+  customCharacters: 
+  fontRenderingMode: 2
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
